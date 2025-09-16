@@ -1,4 +1,4 @@
-# 🚀 Lightweight Spring Actuator Observer
+# 🚀 Lightweight Spring Actuator Monitor
 
 A zero-setup HTML dashboard for monitoring Spring Boot Actuator metrics in real-time. 
 Download, open in your browser, and start monitoring immediately.
