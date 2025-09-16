@@ -1,3 +1,5 @@
+[👉 **Use the Dashboard Here**](dashboard-monitor.html)
+
 # 🚀 Lightweight Spring Actuator Monitor
 
 A zero-setup HTML dashboard for monitoring Spring Boot Actuator metrics in real-time. 
