@@ -57,7 +57,20 @@ Perfect for developers who value pragmatic solutions over enterprise complexity.
 
 Your Spring Boot application needs to have Actuator enabled:
 
+1. Add the Actuator dependency to your `pom.xml`:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+2. Basic configuration in your `application.yml` or `application.properties`:
+
 ```yaml
+server:
+  port: 8080  # Verify this matches the URL in the dashboard
+
 management:
   endpoints:
     web:
@@ -67,6 +80,22 @@ management:
     health:
       show-details: always
 ```
+
+3. **Optional: CORS Configuration**
+
+If you encounter access errors when trying to connect to your Spring Boot application from the dashboard, you'll need to enable CORS. Add this to your configuration:
+
+```yaml
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: "*"        # For development only
+        allowed-methods: GET,POST
+        allowed-headers: "*"
+```
+
+> ⚠️ Note: For production environments, replace "*" with specific allowed origins for better security.
 
 ## 🎯 Use Cases
 
