@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -259,31 +259,31 @@
 <div class="container">
 	<h1>🚀 Spring Boot Memory Monitor</h1>
 
-	<!-- Configuração -->
+	<!-- Configuration -->
 	<div class="config">
 		<label>Actuator URL:</label>
 		<input type="text" id="baseUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
-		<button onclick="updateBaseUrl()">Conectar</button>
+		<button onclick="updateBaseUrl()">Connect</button>
 	</div>
 
-	<!-- Controles -->
+	<!-- Controls -->
 	<div class="controls">
 		<button id="refreshBtn" onclick="refreshMetrics()">🔄 Refresh</button>
 		<button id="autoRefreshBtn" onclick="toggleAutoRefresh()">⏰ Auto Refresh (OFF)</button>
-		<span>Intervalo: </span>
-		<input type="number" id="interval" value="5" min="1" max="60" style="width: 60px"> segundos
+		<span>Interval: </span>
+		<input type="number" id="interval" value="5" min="1" max="60" style="width: 60px"> seconds
 	</div>
 
 	<!-- Status -->
 	<div id="status" class="status"></div>
 
-	<!-- Abas -->
+	<!-- Tabs -->
 	<div class="tabs">
-		<button class="tab-button active" onclick="switchTab('metrics')">📊 Métricas</button>
-		<button class="tab-button" onclick="switchTab('info')">ℹ️ Informações</button>
+		<button class="tab-button active" onclick="switchTab('metrics')">📊 Metrics</button>
+		<button class="tab-button" onclick="switchTab('info')">ℹ️ Information</button>
 	</div>
 
-	<!-- Conteúdo das Abas -->
+	<!-- Tab Content -->
 	<div id="metricsTab" class="tab-content active">
 		<div class="metrics-grid" id="metricsGrid">
 			<!-- Metrics will be populated here -->
@@ -546,7 +546,7 @@
 
 	async function refreshMetrics() {
 		const status = document.getElementById('status');
-		status.textContent = '🔄 Carregando métricas...';
+		status.textContent = '🔄 Loading metrics...';
 		status.className = 'status';
 
 		let successCount = 0;
@@ -558,10 +558,10 @@
 		await Promise.all(promises);
 
 		if (successCount > 0) {
-			status.textContent = `✅ ${successCount}/${metrics.length} métricas carregadas - ${new Date().toLocaleTimeString()}`;
+			status.textContent = `✅ ${successCount}/${metrics.length} metrics loaded - ${new Date().toLocaleTimeString()}`;
 			status.className = 'status success';
 		} else {
-			status.textContent = '❌ Erro ao carregar métricas. Verifique se o Actuator está habilitado e acessível.';
+			status.textContent = '❌ Error loading metrics. Check if Actuator is enabled and accessible.';
 			status.className = 'status error';
 		}
 	}
