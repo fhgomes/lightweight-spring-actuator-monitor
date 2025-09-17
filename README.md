@@ -64,6 +64,13 @@ Check out our live development progress on the [GitHub Project Board](https://gi
 - **Notification Support** - Send alerts to other tools, Slack, Discord, or other messaging services
 - **Customizable Alerts** - Set thresholds for each metric and receive alerts when they're exceeded
 
+### Visual Customization
+- **Clean Mode** - Switch to a clean theme for better visibility
+- **Dark Mode** - Switch to a dark theme for better visibility
+- **Custom Colors** - Choose your own colors for each metric
+- **Custom Icons** - Replace the default icons with your own
+- **Custom Logos** - Add your own company logo to the dashboard
+- 
 ### Customization Features
 - **Configurable Metrics** - Choose which metrics to display and track
 - **Custom Thresholds** - Set alert levels based on your application's needs
