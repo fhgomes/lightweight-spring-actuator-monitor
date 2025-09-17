@@ -59,6 +59,11 @@ Check out our live development progress on the [GitHub Project Board](https://gi
 - **Performance Insights** - Automated suggestions for JVM optimization
 - **Custom Dashboards** - Create views tailored to specific monitoring needs
 
+### Alerts
+- **Notification Support** - Send alerts to Browser
+- **Notification Support** - Send alerts to other tools, Slack, Discord, or other messaging services
+- **Customizable Alerts** - Set thresholds for each metric and receive alerts when they're exceeded
+
 ### Customization Features
 - **Configurable Metrics** - Choose which metrics to display and track
 - **Custom Thresholds** - Set alert levels based on your application's needs
@@ -183,6 +188,21 @@ If this project helped you, please consider giving it a star! ⭐
 ---
 
 **Made with ❤️ for the Spring Boot community**
+
+---
+
+## 📋 Version Control
+
+**Current Version:** v1.0.0  
+**Release Date:** 2025-01-16  
+**Last Updated:** 2025-01-16  
+
+### Version History
+- **v1.0.0** (2025-01-16) - Initial release with core monitoring features
+  - Real-time JVM memory, CPU, and GC metrics
+  - Zero-dependency HTML dashboard
+  - Educational tooltips and optimization tips
+  - Responsive design for desktop and mobile
 
 ---
 

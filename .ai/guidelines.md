@@ -1,5 +1,9 @@
 # Coding Guidelines for AI Assistance - Detailed coding standards for JavaScript, HTML, and CSS
 
+**Version**: 1.0  
+**Last Updated**: 2025-01-16  
+**Maintainer**: AI Documentation System
+
 ## JavaScript Guidelines
 
 ### Code Style

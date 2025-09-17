@@ -1,5 +1,9 @@
 # Project Context - Deep dive into project purpose and target users
 
+**Version**: 1.0  
+**Last Updated**: 2025-01-16  
+**Maintainer**: AI Documentation System
+
 ## What is Lightweight Spring Actuator Monitor?
 
 A zero-dependency, single-file HTML dashboard that provides real-time monitoring of Spring Boot Actuator metrics with an educational focus. It serves as both a monitoring tool and a learning platform for understanding JVM performance metrics.

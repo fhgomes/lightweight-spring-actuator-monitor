@@ -1,5 +1,9 @@
 # AI Development Guide for Lightweight Spring Actuator Monitor - Overview of the AI documentation structure and quick start guide
 
+**Version**: 1.0  
+**Last Updated**: 2025-01-16  
+**Maintainer**: AI Documentation System
+
 This directory contains AI-specific documentation and guidelines for the project.
 
 ## Directory Structure
@@ -9,9 +13,9 @@ This directory contains AI-specific documentation and guidelines for the project
 ├── README.md         # This file - project context & overview
 ├── guidelines.md     # Coding standards & preferences
 ├── architecture.md   # System design principles
-└── prompts.yml      # AI-specific instructions
-├── context.md       # Project context and goals
-└── config.yml       # Machine-readable preferences
+├── prompts.yml       # AI-specific instructions
+├── context.md        # Project context and goals
+└── config.yml        # Machine-readable preferences
 ```
 
 ## Quick Start for AI

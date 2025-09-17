@@ -1,5 +1,9 @@
 # Architecture Design Principles - System design principles with diagrams and component structure
 
+**Version**: 1.0  
+**Last Updated**: 2025-01-16  
+**Maintainer**: AI Documentation System
+
 ## System Overview
 
 ```
