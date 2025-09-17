@@ -4,20 +4,22 @@ root = true
 charset = utf-8
 indent_style = tab
 indent_size = 4
-insert_final_newline = false
+insert_final_newline = true
 trim_trailing_whitespace = true
 end_of_line = lf
 max_line_length = 120
 
-[*.{html, js}]
+[*.{html,js,css}]
 indent_style = tab
 indent_size = 4
+quote_type = single
+max_line_length = 120
 
 [*.json]
 indent_style = space
 indent_size = 2
 
-[*.{java, kt}]
+[*.{java,kt}]
 indent_size = 4
 wildcard_import_limit = 4
 ij_java_packages_to_use_import_on_demand = java.awt.,javax.swing.
@@ -25,5 +27,6 @@ ij_java_packages_to_use_import_on_demand = java.awt.,javax.swing.
 [*.md]
 trim_trailing_whitespace = false
 
-[{.yml,.yaml}]
-indent_style=space
+[{*.yml,*.yaml}]
+indent_style = space
+indent_size = 2
