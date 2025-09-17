@@ -9,6 +9,7 @@ project:
   type: "single-file-application"
   primary_language: "javascript"
   architecture: "standalone"
+  privacy_focus: true
 
 # Code Style
 style:
@@ -36,12 +37,17 @@ documentation:
   code_comments: true
   update_screenshots: true
 
-# Security
+# Security & Privacy
 security:
+  data_storage: false
+  client_side_only: true
   cors_required: "optional"
   secure_defaults: true
   sanitize_input: true
   production_guidelines: true
+  data_collection: false
+  cookies_usage: false
+  third_party_services: false
 
 # Performance
 performance:

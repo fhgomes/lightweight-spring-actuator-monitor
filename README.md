@@ -30,6 +30,22 @@ without spinning up a full monitoring stack, this tool bridges the gap between "
 
 Perfect for developers who value pragmatic solutions over enterprise complexity.
 
+## 🔒 Data Safety & Privacy
+
+### Zero Data Storage
+- **100% Client-Side:** All operations happen in your browser
+- **No Backend Server:** Pure HTML/CSS/JavaScript implementation
+- **No Data Collection:** Your metrics are never stored or transmitted anywhere
+- **No Cookies:** No tracking, no storage, no persistence
+- **Direct Communication:** Dashboard connects directly to your Spring Boot Actuator endpoints
+
+### Security Considerations
+- **Local Processing:** All data processing happens locally in your browser
+- **No Third-Party Services:** No external dependencies or CDNs
+- **Transparent Code:** Single HTML file with readable, unobfuscated code
+- **CORS Aware:** Respects your Spring Boot application's CORS settings
+- **Network Safety:** Only connects to the Actuator URL you specify
+
 ## ✨ Current Features
 
 - **Real-time monitoring** of JVM memory, CPU, and GC metrics
@@ -53,16 +69,24 @@ Check out our live development progress on the [GitHub Project Board](https://gi
 - **Memory Pool Analysis** - Track individual memory pool usage and trends
 - **Non-Heap Metrics** - Detailed Metaspace and Code Cache monitoring
 
+### Alerts
+- **Notification Support** - Send alerts to Browser
+- **Notification Support** - Send alerts to other tools, Slack, Discord, or other messaging services
+- **Customizable Alerts** - Set thresholds for each metric and receive alerts when they're exceeded
+
 ### Advanced Analytics
 - **Historical Trending** - Track metric patterns over time
 - **Predictive Alerts** - Get early warnings based on metric trends
 - **Performance Insights** - Automated suggestions for JVM optimization
 - **Custom Dashboards** - Create views tailored to specific monitoring needs
 
-### Alerts
-- **Notification Support** - Send alerts to Browser
-- **Notification Support** - Send alerts to other tools, Slack, Discord, or other messaging services
-- **Customizable Alerts** - Set thresholds for each metric and receive alerts when they're exceeded
+### Security & Privacy Enhancements
+- **Optional Local Storage** - Save your configuration locally with clear user consent and control
+- **Encryption Support** - Optional encryption for any locally stored data
+- **Security Headers Configuration** - Help configure security headers for your Spring Boot application
+- **Access Control Templates** - Pre-configured security settings for different environments
+- **Security Audit Mode** - Scan and suggest security improvements for your Actuator setup
+- **Privacy Dashboard** - Clear visualization of all data handling and storage options
 
 ### Visual Customization
 - **Clean Mode** - Switch to a clean theme for better visibility

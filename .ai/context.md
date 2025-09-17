@@ -8,6 +8,25 @@
 
 A zero-dependency, single-file HTML dashboard that provides real-time monitoring of Spring Boot Actuator metrics with an educational focus. It serves as both a monitoring tool and a learning platform for understanding JVM performance metrics.
 
+## Privacy & Security Focus
+
+Our dashboard stands out for its strong privacy-first approach:
+
+1. **Zero Data Collection**
+   - No metrics storage
+   - No user tracking
+   - No external dependencies
+
+2. **Transparency**
+   - Single-file architecture
+   - Open-source code
+   - Clear documentation
+
+3. **Security by Design**
+   - Client-side only
+   - No server requirements
+   - CORS-aware implementation
+
 ## Core Problems Solved
 
 1. **Complexity Gap**
