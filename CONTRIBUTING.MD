@@ -24,7 +24,7 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
 
 ### 🐛 Reporting Bugs
 - Use the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md)
-- Check if the bug was already reported in [Issues](https://github.com/fhgomes/lightweight-spring-actuator-observer/issues)
+- Check if the bug was already reported in [Issues](https://github.com/fhgomes/lightweight-spring-actuator-monitor/issues)
 - Provide detailed steps to reproduce the issue
 - Include browser information and console errors
 
@@ -48,8 +48,8 @@ Since this is a simple HTML/CSS/JavaScript project, setup is minimal:
 1. **Fork** the repository on GitHub
 2. **Clone** your fork locally:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/lightweight-spring-actuator-observer.git
-   cd lightweight-spring-actuator-observer
+   git clone https://github.com/YOUR-USERNAME/lightweight-spring-actuator-monitor.git
+   cd lightweight-spring-actuator-monitor
    ```
 
 3. **Open** the HTML file in your browser for testing
@@ -215,7 +215,7 @@ Contributors will be recognized in our README.md file and release notes.
 ## 📞 Questions?
 
 Feel free to:
-- Open a [Discussion](https://github.com/fhgomes/lightweight-spring-actuator-observer/discussions)
-- Create an [Issue](https://github.com/fhgomes/lightweight-spring-actuator-observer/issues)
+- Open a [Discussion](https://github.com/fhgomes/lightweight-spring-actuator-monitor/discussions)
+- Create an [Issue](https://github.com/fhgomes/lightweight-spring-actuator-monitor/issues)
 
 Thank you for contributing! 🚀

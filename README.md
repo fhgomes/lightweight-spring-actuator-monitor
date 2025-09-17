@@ -104,7 +104,7 @@ Check out our live development progress on the [GitHub Project Board](https://gi
 ### Coming Soon
 We're actively working on these features, prioritizing them based on community feedback.
 Want to contribute or influence what gets built next? Check out our [Contributing Guidelines](CONTRIBUTING.md) 
-or join the discussion in our [GitHub Issues](https://github.com/fhgomes/lightweight-spring-actuator-observer/issues).
+or join the discussion in our [GitHub Issues](https://github.com/fhgomes/lightweight-spring-actuator-monitor/issues).
 
 ## 📊 Supported Metrics
 
@@ -203,8 +203,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙋‍♂️ Support
 
-- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/fhgomes/lightweight-spring-actuator-observer/issues)
-- **Discussions**: Join conversations in [GitHub Discussions](https://github.com/fhgomes/lightweight-spring-actuator-observer/discussions)
+- **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/fhgomes/lightweight-spring-actuator-monitor/issues)
+- **Discussions**: Join conversations in [GitHub Discussions](https://github.com/fhgomes/lightweight-spring-actuator-monitor/discussions)
 
 ## ⭐ Show Your Support
 
