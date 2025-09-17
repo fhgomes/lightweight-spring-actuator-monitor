@@ -1,0 +1,46 @@
+# AI Prompt Templates - Reusable AI prompt templates for common tasks
+
+feature_enhancement: |
+  Consider enhancing the {feature_name} with these requirements:
+  - Must maintain single-file architecture
+  - Should be backward compatible
+  - Must include documentation updates
+  - Should consider performance impact
+  - Must include error handling
+  - Should preserve educational value
+
+bug_fix: |
+  When addressing bug {bug_id}, consider:
+  - Root cause analysis
+  - Impact on other features
+  - Browser compatibility
+  - Error handling improvements
+  - Documentation updates
+  - Test cases to prevent regression
+
+documentation_update: |
+  When updating documentation for {topic}:
+  - Keep explanations clear and concise
+  - Include practical examples
+  - Address common issues
+  - Update related sections
+  - Consider security implications
+  - Include troubleshooting steps
+
+security_enhancement: |
+  For security improvement {security_feature}:
+  - Follow secure by default principle
+  - Document security implications
+  - Consider CORS configuration
+  - Include production guidelines
+  - Add security warnings
+  - Update security documentation
+
+performance_optimization: |
+  When optimizing {component}:
+  - Measure before and after
+  - Consider browser impact
+  - Document performance gains
+  - Maintain readability
+  - Consider trade-offs
+  - Update performance notes

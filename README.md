@@ -30,7 +30,7 @@ without spinning up a full monitoring stack, this tool bridges the gap between "
 
 Perfect for developers who value pragmatic solutions over enterprise complexity.
 
-## ✨ Features
+## ✨ Current Features
 
 - **Real-time monitoring** of JVM memory, CPU, and GC metrics
 - **Zero dependencies** - pure HTML/CSS/JavaScript
@@ -38,6 +38,37 @@ Perfect for developers who value pragmatic solutions over enterprise complexity.
 - **Detailed explanations** for each metric with optimization tips
 - **Responsive design** that works on desktop and mobile
 - **Easy setup** - just point to your Spring Boot application
+
+## 🔮 Future Features
+
+Check out our live development progress on the [GitHub Project Board](https://github.com/users/fhgomes/projects/1/views/1)
+
+### Multi-Server Monitoring
+- **Multiple Server Support** - Monitor several Spring Boot applications simultaneously
+- **Server Groups** - Organize servers by environment or application type
+- **Consolidated View** - Compare metrics across different instances
+
+### Enhanced Memory Analysis
+- **Detailed Memory Breakdown** - Visualize different memory areas (Eden, Survivor, Old Gen)
+- **Memory Pool Analysis** - Track individual memory pool usage and trends
+- **Non-Heap Metrics** - Detailed Metaspace and Code Cache monitoring
+
+### Advanced Analytics
+- **Historical Trending** - Track metric patterns over time
+- **Predictive Alerts** - Get early warnings based on metric trends
+- **Performance Insights** - Automated suggestions for JVM optimization
+- **Custom Dashboards** - Create views tailored to specific monitoring needs
+
+### Customization Features
+- **Configurable Metrics** - Choose which metrics to display and track
+- **Custom Thresholds** - Set alert levels based on your application's needs
+- **Layout Customization** - Arrange metrics and charts to suit your workflow
+- **Theme Support** - Choose between light/dark modes and custom colors
+
+### Coming Soon
+We're actively working on these features, prioritizing them based on community feedback.
+Want to contribute or influence what gets built next? Check out our [Contributing Guidelines](CONTRIBUTING.md) 
+or join the discussion in our [GitHub Issues](https://github.com/fhgomes/lightweight-spring-actuator-observer/issues).
 
 ## 📊 Supported Metrics
 
