@@ -226,11 +226,20 @@ If this project helped you, please consider giving it a star! ⭐
 
 ## 📋 Version Control
 
-**Current Version:** v1.2.0  
+**Current Version:** v1.3.0  
 **Release Date:** 2025-09-24  
 **Last Updated:** 2025-09-24  
 
 ### Version History
+- **v1.3.0** (2025-09-24) - Real-time memory monitoring with trending indicators
+  - Integrated real-time memory metrics with Spring Boot Actuator endpoints
+  - Added dynamic trending indicators showing actual memory differences (MB ▲/▼)
+  - Implemented countdown timer for auto-refresh with "Next refresh in... Xs" display
+  - Enhanced Connect button to show "🔄 Refresh Now" after successful connection
+  - Fixed trending calculations to reference starting values for accurate comparisons
+  - Improved UI layout with status integration and better flexbox positioning
+  - Added proper error handling and graceful degradation for missing metrics
+
 - **v1.2.0** (2025-09-24) - Dashboard UI/UX enhancements with expert improvements
   - Added UI/UX elements for aggregated, heap and non-heap memory metrics
   - Added progress bars showing memory utilization with color-coded status indicators

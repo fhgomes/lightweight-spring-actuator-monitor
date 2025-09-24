@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-09-24
+
+### Added
+- Real-time memory metrics integration with Spring Boot Actuator endpoints
+- Dynamic trending indicators with historical tracking and up/down arrows
+- Countdown timer showing "Next refresh in... Xs" for auto-refresh functionality
+- Memory difference calculations showing actual MB changes between refreshes
+- Start value references for trending comparisons across all memory sections
+- Progress bars and usage indicators for memory visualization
+- Automatic memory metrics refresh when switching to memory tab
+- Enhanced error handling and graceful degradation for missing metrics
+
+### Changed
+- Connect button text changes to "🔄 Refresh Now" after successful connection
+- Status display integrated into configuration panel layout using flexbox
+- Trending calculations now reference starting values instead of previous values
+- Memory metrics display actual differences (e.g., "4.0 MB ▲", "8.0 MB ▼")
+- Heap area notifications moved into dedicated Heap Area panel section
+- Default refresh interval updated from 5 to 10 seconds
+- Improved countdown reset functionality for manual refreshes and interval changes
+
+### Fixed
+- Trending marks now show actual memory differences instead of total current values
+- Resolved "cron function" timing conflicts and duplicate interval creation
+- Fixed byte-to-MB conversion bugs in trending calculations
+- Added proper unchanged state styling for zero-difference displays
+- Eliminated race conditions between auto-refresh and countdown timers
+
+### Improved
+- UI responsiveness with better flexbox layout and spacing
+- Visual hierarchy with status messages positioned next to Connect button
+- Memory monitoring accuracy with live data instead of static values
+- User experience with integrated refresh functionality and visual feedback
+- Dashboard layout optimization for better space utilization
+
 ## [1.2.0] - 2025-09-24
 
 ### Added
@@ -66,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Auto-refresh functionality
 - Progress bar visualizations
 
+[1.3.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.3.0
 [1.2.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.2.0
 [1.1.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.1.0
 [1.0.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.0.0
