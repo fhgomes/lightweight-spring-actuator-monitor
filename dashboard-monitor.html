@@ -508,10 +508,7 @@
 								<div class="metric-header">Max Memory (All)</div>
 								<div class="metric-value">7408.0 MB</div>
 								<div class="historical-values">
-									<span class="down">7390.5 MB ▼ 30s</span>
-									<span class="up">7420.2 MB ▲ 60s</span>
-									<span class="down">7380.8 MB ▼ 5min</span>
-									<span>7408.0 MB start</span>
+									<!-- Will be populated by JavaScript -->
 								</div>
 							</div>
 							<div class="memory-metric-card">
@@ -575,7 +572,7 @@
 								<div class="metric-header">Max Memory (Heap)</div>
 								<div class="metric-value">6144.0 MB</div>
 								<div class="historical-values">
-									<span>6144.0 MB (constant)</span>
+									<!-- Will be populated by JavaScript -->
 								</div>
 							</div>
 							<div class="memory-metric-card">
@@ -647,6 +644,9 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Max Memory (Non-Heap)</div>
 								<div class="metric-value">1264.0 MB</div>
+								<div class="historical-values">
+									<!-- Will be populated by JavaScript -->
+								</div>
 							</div>
 							<div class="memory-metric-card">
 								<div class="metric-header">Committed Memory (Non-Heap)</div>
@@ -1270,11 +1270,16 @@
 			valueElement.textContent = `${formattedValue} ${unit}`;
 		}
 
-		// Update history and trending
-		updateMemoryHistory(historyKey, value);
+		// Check if this is a max memory metric (doesn't change, so no trending needed)
+		const isMaxMemory = historyKey && historyKey.includes('-max');
+
 		const historicalElement = card.querySelector('.historical-values');
 		if (historicalElement) {
-			historicalElement.innerHTML = getTrendingHtml(historyKey, formattedValue, unit);
+			if (!isMaxMemory) {
+				// Update history and trending for non-max metrics
+				updateMemoryHistory(historyKey, value);
+				historicalElement.innerHTML = getTrendingHtml(historyKey, formattedValue, unit);
+			}
 		}
 
 		// Update progress bar if needed
