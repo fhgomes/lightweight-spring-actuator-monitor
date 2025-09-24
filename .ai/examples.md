@@ -24,6 +24,16 @@ I want to add support for monitoring thread deadlock detection. Please help me:
 - Include error handling for when the metric isn't available
 - Update documentation to reflect the new feature
 
+**Example Commit for New Metric:**
+```
+[refs #25] feat: add thread deadlock detection support
+
+Adds new metric card for monitoring thread deadlocks, including:
+- API integration with /actuator/metrics/jvm.threads.deadlocked
+- Warning styling for detected deadlocks
+- Educational tooltips about thread deadlock detection
+```
+
 ## Improving Performance
 
 **Example Prompt:**
@@ -40,6 +50,16 @@ Please optimize the performance while maintaining real-time updates.
 - Consider debouncing for user interactions
 - Maintain the target refresh efficiency of < 100ms per update
 
+**Example Commit:**
+```
+[refs #31] perf: optimize metric refresh performance
+
+- Implements DOM update batching
+- Adds requestAnimationFrame for smooth updates
+- Caches DOM selections
+- Adds debouncing for frequent updates
+```
+
 ## Security Enhancement
 
 **Example Prompt:**
@@ -54,6 +74,16 @@ I need to make this dashboard more secure for production use. What security impr
 - Suggest secure defaults for all configurations
 - Provide production deployment security checklist
 - Address potential XSS vulnerabilities
+
+**Example Commit:**
+```
+[refs #42] security: enhance production security measures
+
+- Implements strict CSP headers
+- Adds URL sanitization
+- Updates CORS configuration guidance
+- Includes security checklist for production
+```
 
 ## UX/UI Enhancement
 
@@ -71,6 +101,16 @@ How can I improve the visual indicators and educational content?
 - Maintain accessibility standards (WCAG compliance)
 - Provide clear actionable recommendations
 
+**Example Commit:**
+```
+[refs #38] feat: improve memory issue indicators
+
+- Enhances color coding for severity levels
+- Adds progressive disclosure for explanations
+- Implements tooltips for quick understanding
+- Updates visual hierarchy for critical metrics
+```
+
 ## Documentation Update
 
 **Example Prompt:**
@@ -87,6 +127,16 @@ to reflect this new capability.
 - Maintain clear, action-oriented language
 - Include security considerations for custom endpoints
 
+**Example Commit:**
+```
+[refs #45] docs: add custom endpoint configuration guide
+
+- Documents custom endpoint setup
+- Adds configuration examples
+- Updates security considerations
+- Includes troubleshooting section
+```
+
 ## Bug Fix Assistance
 
 **Example Prompt:**
@@ -102,6 +152,16 @@ starts up and metrics aren't available yet. How should I fix this?
 - Consider showing helpful messages during loading
 - Ensure fix doesn't break existing functionality
 - Add defensive programming patterns
+
+**Example Fix Commit:**
+```
+[fixes #52] fix: handle NaN values in memory chart
+
+- Adds graceful degradation for missing metrics
+- Implements loading states
+- Improves error handling
+- Updates user feedback during startup
+```
 
 ## Code Review Request
 

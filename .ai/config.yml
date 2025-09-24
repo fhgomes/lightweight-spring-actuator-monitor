@@ -3,7 +3,7 @@ version: 1.0.0
 # Development Standards Configuration
 standards:
   commit_pattern:
-    format: "<type>: <description> [<reference>]"
+    format: "[<reference>] <type>: <description>"
     types:
       - feat
       - fix
@@ -13,11 +13,11 @@ standards:
       - test
       - chore
     references:
-      wip: "refs #<issue>:"
+      wip: "[refs #<issue>]"
       completion:
-        - "fixes #<issue>:"
-        - "closes #<issue>:"
-        - "resolves #<issue>:"
+        - "[fixes #<issue>]"
+        - "[closes #<issue>]"
+        - "[resolves #<issue>]"
 
   branch_pattern:
     format: "<type>/<issue-number>_<description>"
@@ -31,6 +31,47 @@ standards:
       - test
       - chore
 
+  pr_template:
+    title_format: "[<reference>] <type>: <description>"
+    sections:
+      - name: "Overview"
+        required: true
+      - name: "Changes"
+        required: true
+      - name: "Testing"
+        required: true
+        subsections:
+          - "Browser Compatibility"
+          - "Performance Impact"
+          - "Error Scenarios"
+      - name: "Visual Changes"
+        required: false
+      - name: "Related Issues"
+        required: true
+      - name: "Additional Notes"
+        required: false
+
+  pr_checklist:
+    - category: "Code Quality"
+      items:
+        - "Branch follows naming convention"
+        - "Commits are properly formatted"
+        - "Code follows project standards"
+        - "No unnecessary file changes"
+
+    - category: "Testing"
+      items:
+        - "Chrome tested"
+        - "Firefox tested"
+        - "Safari tested"
+        - "Responsive design verified"
+
+    - category: "Documentation"
+      items:
+        - "README updated if needed"
+        - "Code comments added where necessary"
+        - "JSDoc for public functions"
+
 # AI Assistant Configuration
 ai_preferences:
   code_style: "clean and documented"
@@ -40,3 +81,9 @@ ai_preferences:
     - code quality
     - user privacy
     - educational value
+
+  review_focus:
+    - browser compatibility
+    - performance
+    - security
+    - accessibility

@@ -77,21 +77,23 @@ Examples:
 
 ### Commit Message Format
 ```
-<type>: <description> [<reference>]
+[<reference>] <type>: <description>
+
+[optional body]
 ```
 
 #### Issue References
 - For work in progress:
   ```
-  feat: implement dark mode [refs #42]
-  feat: add initial theme support refs #42: still working on color scheme
+  [refs #42] feat: implement dark mode
+  [refs #42] feat: add initial theme support - still working on color scheme
   ```
 
 - For completing work:
   ```
-  fix: resolve memory calculation [fixes #7]
-  docs: update browser support [closes #13]
-  feat: add CPU chart [resolves #15]
+  [fixes #7] fix: resolve memory calculation
+  [closes #13] docs: update browser support
+  [resolves #15] feat: add CPU chart
   ```
 
 ### Types
@@ -103,19 +105,33 @@ Examples:
 - **test**: Adding or updating tests
 - **chore**: Maintenance tasks
 
+### Commit Best Practices
+1. Keep commits atomic and focused
+2. Write clear and descriptive messages
+3. Reference issues appropriately
+4. Squash commits before merging:
+   ```bash
+   # If you have multiple commits in your feature branch
+   git checkout your-feature-branch
+   git rebase -i main
+   # Mark commits as 'squash' except the first one
+   # Update the commit message to be comprehensive
+   git push --force-with-lease
+   ```
+
 ### Examples
 ```bash
-feat: add CPU usage trending chart [refs #15]
+[refs #15] feat: add CPU usage trending chart
 
 Implements a mini chart showing CPU usage over the last 10 data points
 to help identify usage patterns and spikes.
 
-feat: complete CPU monitoring implementation [fixes #15]
+[fixes #15] feat: complete CPU monitoring implementation
 
 The timer wasn't being properly cleared when switching tabs,
 causing multiple timers to run simultaneously.
 
-docs: update README with browser compatibility info [refs #18]
+[refs #18] docs: update README with browser compatibility info
 
 Adds section explaining which browsers are supported and
 known limitations with older versions.

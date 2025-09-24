@@ -44,3 +44,287 @@ performance_optimization: |
   - Maintain readability
   - Consider trade-offs
   - Update performance notes
+
+branch_operations: |
+  When working with branches (Trunk-Based Development):
+  - Keep branches short-lived (1-2 days max)
+  - Branch directly from main/trunk
+  - Merge frequently back to main
+  - Use proper naming convention
+  - Clean up after merge
+
+  Example prompts:
+
+  Creating feature branch:
+  ```
+  Create a new branch for implementing dark mode theme (issue #42):
+  > git checkout -b feat/42_dark_mode main
+  ```
+
+  Creating bugfix branch:
+  ```
+  Create branch to fix memory calculation (issue #7):
+  > git checkout -b fix/7_memory_calc main
+  ```
+
+  Updating branch with main:
+  ```
+  Update current branch with latest main changes:
+  > git checkout feat/42_dark_mode
+  > git fetch origin
+  > git rebase origin/main
+  ```
+
+  Merging back to main:
+  ```
+  Merge completed feature into main:
+  > git checkout main
+  > git merge --no-ff feat/42_dark_mode
+  > git push origin main
+  > git branch -d feat/42_dark_mode  # Clean up local branch
+  > git push origin --delete feat/42_dark_mode  # Clean up remote branch
+  ```
+
+  Branch naming examples:
+  - feat/42_dark_mode
+  - fix/7_memory_calc
+  - docs/13_security_guide
+  - refactor/22_optimize_refresh
+  - test/15_browser_compatibility
+
+pull_request_workflow: |
+  When creating/managing Pull Requests:
+  - Use clear, descriptive titles with issue reference
+  - Follow project's PR template
+  - Include context and rationale
+  - Add screenshots for UI changes
+  - Tag appropriate reviewers
+  - Move issue to Code Review status
+  - Notify team in communication channel
+
+  Example PR title formats:
+  ```
+  [refs #42] Feature: Dark Mode Implementation
+  [fixes #7] Fix: Memory Calculation Error
+  [closes #13] Docs: Security Configuration Guide
+  ```
+
+  Example PR description template:
+  ```
+  ## Overview
+  Brief description of what this PR addresses and why.
+
+  ## Changes
+  - [ ] Implemented feature X
+  - [ ] Fixed bug Y
+  - [ ] Updated documentation Z
+
+  ## Testing
+  - [ ] Browser compatibility verified
+    - [ ] Chrome
+    - [ ] Firefox
+    - [ ] Safari
+  - [ ] Responsive design checked
+  - [ ] Performance impact considered
+
+  ## Visual Changes
+  [Screenshots/GIFs if applicable]
+
+  Before | After
+  -------|-------
+  [img]  | [img]
+
+  ## Related Issues
+  - Fixes #123
+  - Related to #456
+
+  ## Additional Notes
+  - Configuration changes needed
+  - Browser requirements
+  - Performance considerations
+  ```
+
+code_review: |
+  When performing code reviews, consider:
+
+  Project Context:
+  - Project's coding standards
+  - Open source best practices
+  - Educational value for contributors
+  - Browser compatibility requirements
+
+  Code Quality:
+  - Code readability and maintainability
+  - Consistent naming conventions
+  - Single responsibility principle
+  - DRY (Don't Repeat Yourself)
+  - Function/method size and complexity
+
+  Functionality:
+  - Does it solve the issue effectively?
+  - Edge cases considered
+  - Error handling
+  - Browser compatibility
+  - Performance implications
+
+  User Experience:
+  - Responsive design
+  - Loading states
+  - Error messages
+  - Browser support
+  - Accessibility
+
+  Documentation:
+  - Code comments where needed
+  - README updates if required
+  - JSDoc for public functions
+  - Usage examples added
+
+  Testing:
+  - Browser compatibility verified
+  - Responsive design tested
+  - Error scenarios covered
+
+  Security:
+  - Input validation
+  - XSS prevention
+  - CORS configuration
+  - Secure defaults
+
+  Example review comments:
+  ```
+  💡 Suggestion for readability:
+  Consider extracting this logic into a named function:
+  ```js
+  function calculateMemoryPercentage(used, total) {
+    return (used / total) * 100;
+  }
+  ```
+
+  ⚠️ Performance consideration:
+  This DOM query is inside a loop. Consider caching the result:
+  ```js
+  const metricContainer = document.getElementById('metrics');
+  metrics.forEach(m => {
+    // Use metricContainer instead of querying each time
+  });
+  ```
+
+  🎯 Accessibility improvement:
+  Add ARIA labels for screen readers:
+  ```html
+  <button aria-label="Refresh metrics">🔄</button>
+  ```
+
+  📝 Documentation request:
+  Could you add a brief comment explaining this calculation?
+  ```
+
+code_review_checklist: |
+  Review checklist for open source contributions:
+
+  Code Quality:
+  - [ ] Follows project coding style
+  - [ ] Clear variable/function names
+  - [ ] No unnecessary complexity
+  - [ ] Proper error handling
+  - [ ] Browser compatibility considered
+
+  Documentation:
+  - [ ] Code is self-documenting/commented
+  - [ ] README updated if needed
+  - [ ] JSDoc for public functions
+  - [ ] Examples provided if needed
+
+  Testing:
+  - [ ] Works across browsers
+  - [ ] Responsive design verified
+  - [ ] Error cases handled
+  - [ ] Performance acceptable
+
+  Security:
+  - [ ] Input sanitized
+  - [ ] No exposed sensitive data
+  - [ ] Safe DOM operations
+
+  User Experience:
+  - [ ] Intuitive behavior
+  - [ ] Proper error messages
+  - [ ] Loading states
+  - [ ] Accessibility considered
+
+  Git/GitHub:
+  - [ ] Clean, focused commits
+  - [ ] Proper issue references
+  - [ ] Branch naming follows convention
+  - [ ] No unnecessary files
+
+ai_review_prompts: |
+  Prompts for AI code review:
+
+  Basic Review:
+  ```
+  Please review this code focusing on:
+  1. Code quality and best practices
+  2. Potential bugs or issues
+  3. Performance implications
+  4. Security considerations
+  5. Browser compatibility
+  ```
+
+  Detailed Review:
+  ```
+  Please perform a comprehensive code review for this {file_type} focusing on:
+
+  1. Code Structure:
+     - Clean code principles
+     - Function organization
+     - Variable naming
+     - Error handling
+
+  2. Performance:
+     - DOM operations
+     - Memory usage
+     - Browser impact
+
+  3. Security:
+     - Input validation
+     - XSS prevention
+     - Safe DOM manipulation
+
+  4. Browser Compatibility:
+     - Modern JS features used
+     - CSS compatibility
+     - Fallback handling
+
+  5. Documentation:
+     - Code comments
+     - JSDoc completeness
+     - README updates
+
+  Provide specific examples and suggestions for improvements.
+  ```
+
+  PR Review:
+  ```
+  Review this pull request for the {project_name} project:
+
+  1. Check if it follows project guidelines:
+     - Coding standards
+     - Documentation requirements
+     - Testing expectations
+
+  2. Verify the changes:
+     - Solution effectiveness
+     - Code quality
+     - Performance impact
+     - Browser support
+
+  3. Look for:
+     - Potential bugs
+     - Security issues
+     - Accessibility concerns
+     - Documentation needs
+
+  Provide constructive feedback and specific improvement suggestions.
+  ```
