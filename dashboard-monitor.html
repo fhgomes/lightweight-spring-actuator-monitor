@@ -227,6 +227,51 @@
 			color: #FFD700;
 		}
 
+		/* All Metrics Tab Styles */
+		.metrics-list {
+			background: rgba(255,255,255,0.1);
+			border-radius: 15px;
+			padding: 20px;
+			backdrop-filter: blur(10px);
+		}
+		.metric-item {
+			background: rgba(255,255,255,0.15);
+			margin-bottom: 15px;
+			padding: 15px;
+			border-radius: 10px;
+			border: 1px solid rgba(255,255,255,0.2);
+		}
+		.metric-item:hover {
+			background: rgba(255,255,255,0.2);
+		}
+		.metric-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+		.metric-name {
+			font-size: 1.1em;
+			font-weight: bold;
+			color: #FFD700;
+		}
+		.metric-details {
+			color: rgba(255,255,255,0.9);
+		}
+		.metric-tags {
+			margin-top: 8px;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5px;
+		}
+		.metric-tag {
+			background: rgba(255,255,255,0.1);
+			padding: 3px 8px;
+			border-radius: 12px;
+			font-size: 0.9em;
+			color: #FFD700;
+		}
+
 		.footer {
 			margin-top: 40px;
 			padding: 30px 0 10px 0;
@@ -262,6 +307,14 @@
 		🔒 100% Client-Side & Data-Safe: No Storage, No Servers, Pure HTML/JS
 	</h2>
 
+	<!-- Controls -->
+	<div class="controls config">
+		<button id="refreshBtn" onclick="refreshMetrics()">🔄 Refresh</button>
+		<button id="autoRefreshBtn" onclick="toggleAutoRefresh()">⏰ Auto Refresh (OFF)</button>
+		<span>Interval: </span>
+		<input type="number" id="interval" value="5" min="1" max="60" style="width: 60px"> seconds
+	</div>
+
 	<!-- Configuration -->
 	<div class="config">
 		<label>Actuator URL:</label>
@@ -269,27 +322,26 @@
 		<button onclick="updateBaseUrl()">Connect</button>
 	</div>
 
-	<!-- Controls -->
-	<div class="controls">
-		<button id="refreshBtn" onclick="refreshMetrics()">🔄 Refresh</button>
-		<button id="autoRefreshBtn" onclick="toggleAutoRefresh()">⏰ Auto Refresh (OFF)</button>
-		<span>Interval: </span>
-		<input type="number" id="interval" value="5" min="1" max="60" style="width: 60px"> seconds
-	</div>
-
 	<!-- Status -->
 	<div id="status" class="status"></div>
 
 	<!-- Tabs -->
 	<div class="tabs">
-		<button class="tab-button active" onclick="switchTab('metrics')">📊 Metrics</button>
+		<button class="tab-button active" onclick="switchTab('overview')">📈 Overview</button>
+		<button class="tab-button" onclick="switchTab('allMetrics')">📊 All Metrics</button>
 		<button class="tab-button" onclick="switchTab('info')">ℹ️ Information</button>
 	</div>
 
 	<!-- Tab Content -->
-	<div id="metricsTab" class="tab-content active">
+	<div id="overviewTab" class="tab-content active">
 		<div class="metrics-grid" id="metricsGrid">
 			<!-- Metrics will be populated here -->
+		</div>
+	</div>
+
+	<div id="allMetricsTab" class="tab-content">
+		<div class="metrics-list" id="allMetricsList">
+			<!-- All metrics will be populated here -->
 		</div>
 	</div>
 
