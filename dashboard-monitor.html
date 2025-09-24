@@ -460,7 +460,7 @@
 	<!-- Configuration -->
 	<div class="config">
 		<label>Actuator URL:</label>
-		<input type="text" id="baseUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
+		<input type="text" id="baseUrl" value="http://localhost:8081" placeholder="http://localhost:8081">
 		<button onclick="updateBaseUrl()">Connect</button>
 	</div>
 
@@ -610,6 +610,17 @@
 								<div class="metric-value">5418.2 MB</div>
 							</div>
 						</div>
+
+						<div class="memory-notifications">
+							<div class="notification info">
+								<span class="icon">🧠</span>
+								<span class="message">The application is using about 725.8 MB of heap memory, with 1756.0 MB committed, and a maximum heap limit of 6144.0 MB.</span>
+							</div>
+							<div class="notification warning">
+								<span class="icon">⚠️</span>
+								<span class="message">It can still allocate up to 5418.2 MB of heap before hitting an OutOfMemoryError.</span>
+							</div>
+						</div>
 					</div>
 
 					<div class="metric-section nonheap">
@@ -671,16 +682,6 @@
 						</div>
 					</div>
 
-					<div class="memory-notifications">
-						<div class="notification info">
-							<span class="icon">🧠</span>
-							<span class="message">The application is using about 725.8 MB of heap memory, with 1756.0 MB committed, and a maximum heap limit of 6144.0 MB.</span>
-						</div>
-						<div class="notification warning">
-							<span class="icon">⚠️</span>
-							<span class="message">It can still allocate up to 5418.2 MB of heap before hitting an OutOfMemoryError.</span>
-						</div>
-					</div>
 
 				</div>
 			</div>
@@ -846,9 +847,10 @@
 </style>
 
 <script>
-	let baseUrl = 'http://localhost:8080';
+	let baseUrl = 'http://localhost:8081';
 	let autoRefreshInterval = null;
 	let isAutoRefreshOn = false;
+	let memoryHistory = {};
 
 	const metrics = [
 		{
@@ -895,9 +897,17 @@
 		}
 	];
 
-	function updateBaseUrl() {
+	async function updateBaseUrl() {
 		baseUrl = document.getElementById('baseUrl').value.replace(/\/$/, '');
-		refreshMetrics();
+		const success = await refreshMetrics();
+
+		// Change button text to "Refresh Now" after successful connection
+		if (success) {
+			const connectBtn = document.querySelector('button[onclick="updateBaseUrl()"]');
+			if (connectBtn) {
+				connectBtn.textContent = '🔄 Refresh Now';
+			}
+		}
 	}
 
 	function createMetricCard(metric) {
@@ -976,6 +986,15 @@
 			status.textContent = '❌ Error loading metrics. Check if Actuator is enabled and accessible.';
 			status.className = 'status error';
 		}
+
+		// Also refresh memory metrics if memory tab is active
+		const memoryTab = document.getElementById('memoryMetricsTab');
+		if (memoryTab && memoryTab.classList.contains('active')) {
+			await refreshMemoryMetrics();
+		}
+
+		// Return success status for use by other functions
+		return successCount > 0;
 	}
 
 	function toggleAutoRefresh() {
@@ -1030,6 +1049,225 @@
 		// Add active class to selected inner tab
 		event.target.classList.add('active');
 		document.getElementById(tabName + 'MetricsTab').classList.add('active');
+
+		// Refresh memory metrics when memory tab is selected
+		if (tabName === 'memory') {
+			refreshMemoryMetrics();
+		}
+	}
+
+	// Memory metrics functions
+	async function fetchMemoryData() {
+		try {
+			const [heapUsed, heapMax, heapCommitted, nonheapUsed, nonheapMax, nonheapCommitted] = await Promise.all([
+				fetch(baseUrl + '/actuator/metrics/jvm.memory.used?tag=area:heap').then(r => r.json()),
+				fetch(baseUrl + '/actuator/metrics/jvm.memory.max?tag=area:heap').then(r => r.json()),
+				fetch(baseUrl + '/actuator/metrics/jvm.memory.committed?tag=area:heap').then(r => r.json()),
+				fetch(baseUrl + '/actuator/metrics/jvm.memory.used?tag=area:nonheap').then(r => r.json()),
+				fetch(baseUrl + '/actuator/metrics/jvm.memory.max?tag=area:nonheap').then(r => r.json()),
+				fetch(baseUrl + '/actuator/metrics/jvm.memory.committed?tag=area:nonheap').then(r => r.json())
+			]);
+
+			return {
+				heap: {
+					used: heapUsed.measurements?.[0]?.value || 0,
+					max: heapMax.measurements?.[0]?.value || 0,
+					committed: heapCommitted.measurements?.[0]?.value || 0
+				},
+				nonheap: {
+					used: nonheapUsed.measurements?.[0]?.value || 0,
+					max: nonheapMax.measurements?.[0]?.value || 0,
+					committed: nonheapCommitted.measurements?.[0]?.value || 0
+				}
+			};
+		} catch (error) {
+			console.error('Error fetching memory data:', error);
+			return null;
+		}
+	}
+
+	function formatMemory(bytes) {
+		return (bytes / 1024 / 1024).toFixed(1);
+	}
+
+	function updateMemoryHistory(key, value) {
+		const now = Date.now();
+		if (!memoryHistory[key]) {
+			memoryHistory[key] = [];
+		}
+
+		memoryHistory[key].push({ value, timestamp: now });
+
+		// Keep only last 10 values for trending
+		if (memoryHistory[key].length > 10) {
+			memoryHistory[key] = memoryHistory[key].slice(-10);
+		}
+	}
+
+	function getTrendingHtml(key, currentValue, unit = 'MB') {
+		if (!memoryHistory[key] || memoryHistory[key].length < 2) {
+			return `<span>${currentValue} ${unit} (initializing)</span>`;
+		}
+
+		const history = memoryHistory[key];
+		const now = Date.now();
+		let html = '';
+
+		// Show last 3-4 historical values with trends
+		const recentHistory = history.slice(-4, -1); // Exclude current value
+
+		recentHistory.forEach((item, index) => {
+			const prevItem = index > 0 ? recentHistory[index - 1] : null;
+			const timeAgo = Math.round((now - item.timestamp) / 1000);
+			const timeLabel = timeAgo < 60 ? `${timeAgo}s` : `${Math.round(timeAgo / 60)}min`;
+
+			let trend = '';
+			let trendClass = '';
+
+			if (prevItem) {
+				if (item.value > prevItem.value) {
+					trend = ' ▲';
+					trendClass = 'up';
+				} else if (item.value < prevItem.value) {
+					trend = ' ▼';
+					trendClass = 'down';
+				}
+			}
+
+			const formattedValue = unit === 'MB' ? formatMemory(item.value) : item.value.toFixed(1);
+			html += `<span class="${trendClass}">${formattedValue} ${unit}${trend} ${timeLabel}</span>`;
+		});
+
+		return html;
+	}
+
+	function updateMemoryCard(selector, value, unit, historyKey, maxValue = null, showProgress = false) {
+		const card = document.querySelector(selector);
+		if (!card) return;
+
+		const formattedValue = unit === 'MB' ? formatMemory(value) : value.toFixed(1);
+		const valueElement = card.querySelector('.metric-value');
+		if (valueElement) {
+			valueElement.textContent = `${formattedValue} ${unit}`;
+		}
+
+		// Update history and trending
+		updateMemoryHistory(historyKey, value);
+		const historicalElement = card.querySelector('.historical-values');
+		if (historicalElement) {
+			historicalElement.innerHTML = getTrendingHtml(historyKey, formattedValue, unit);
+		}
+
+		// Update progress bar if needed
+		if (showProgress && maxValue && maxValue > 0) {
+			const percentage = (value / maxValue) * 100;
+			const progressBar = card.querySelector('.memory-progress-fill');
+			const usageElement = card.querySelector('.memory-usage-percentage span:first-child');
+			const indicatorElement = card.querySelector('.usage-indicator');
+
+			if (progressBar) {
+				progressBar.style.width = `${percentage.toFixed(1)}%`;
+
+				// Update progress bar color based on percentage
+				progressBar.className = 'memory-progress-fill';
+				if (percentage > 80) {
+					progressBar.classList.add('critical');
+				} else if (percentage > 60) {
+					progressBar.classList.add('warning');
+				} else {
+					progressBar.classList.add('normal');
+				}
+			}
+
+			if (usageElement) {
+				usageElement.textContent = `${percentage.toFixed(1)}% of max`;
+			}
+
+			if (indicatorElement) {
+				indicatorElement.className = 'usage-indicator';
+				if (percentage > 80) {
+					indicatorElement.classList.add('critical');
+					indicatorElement.textContent = 'CRITICAL';
+				} else if (percentage > 60) {
+					indicatorElement.classList.add('warning');
+					indicatorElement.textContent = 'WARNING';
+				} else {
+					indicatorElement.classList.add('normal');
+					indicatorElement.textContent = 'NORMAL';
+				}
+			}
+		}
+	}
+
+	async function refreshMemoryMetrics() {
+		const memoryData = await fetchMemoryData();
+		if (!memoryData) {
+			console.error('Failed to fetch memory data');
+			return;
+		}
+
+		const { heap, nonheap } = memoryData;
+
+		// Calculate aggregated values
+		const totalUsed = heap.used + nonheap.used;
+		const totalMax = heap.max + nonheap.max;
+		const totalCommitted = heap.committed + nonheap.committed;
+
+		// Update Aggregated section
+		updateMemoryCard('.metric-section.aggregated .memory-metric-card:nth-child(1)', totalMax, 'MB', 'total-max');
+		updateMemoryCard('.metric-section.aggregated .memory-metric-card:nth-child(2)', totalCommitted, 'MB', 'total-committed', totalMax, true);
+		updateMemoryCard('.metric-section.aggregated .memory-metric-card:nth-child(3)', totalUsed, 'MB', 'total-used', totalMax, true);
+
+		// Update calculated values for aggregated
+		const totalFreeCommitted = totalCommitted - totalUsed;
+		const totalFreeNotCommitted = totalMax - totalCommitted;
+		const totalToOOM = totalMax - totalUsed;
+
+		document.querySelector('.metric-section.aggregated .memory-metric-card:nth-child(4) .metric-value').textContent = `${formatMemory(totalFreeCommitted)} MB`;
+		document.querySelector('.metric-section.aggregated .memory-metric-card:nth-child(5) .metric-value').textContent = `${formatMemory(totalFreeNotCommitted)} MB`;
+		document.querySelector('.metric-section.aggregated .memory-metric-card:nth-child(6) .metric-value').textContent = `${formatMemory(totalToOOM)} MB`;
+
+		// Update Heap section
+		updateMemoryCard('.metric-section.heap .memory-metric-card:nth-child(1)', heap.max, 'MB', 'heap-max');
+		updateMemoryCard('.metric-section.heap .memory-metric-card:nth-child(2)', heap.committed, 'MB', 'heap-committed', heap.max, true);
+		updateMemoryCard('.metric-section.heap .memory-metric-card:nth-child(3)', heap.used, 'MB', 'heap-used', heap.max, true);
+
+		// Update calculated values for heap
+		const heapFreeCommitted = heap.committed - heap.used;
+		const heapFreeNotCommitted = heap.max - heap.committed;
+		const heapToOOM = heap.max - heap.used;
+
+		document.querySelector('.metric-section.heap .memory-metric-card:nth-child(4) .metric-value').textContent = `${formatMemory(heapFreeCommitted)} MB`;
+		document.querySelector('.metric-section.heap .memory-metric-card:nth-child(5) .metric-value').textContent = `${formatMemory(heapFreeNotCommitted)} MB`;
+		document.querySelector('.metric-section.heap .memory-metric-card:nth-child(6) .metric-value').textContent = `${formatMemory(heapToOOM)} MB`;
+
+		// Update Non-heap section
+		updateMemoryCard('.metric-section.nonheap .memory-metric-card:nth-child(1)', nonheap.max, 'MB', 'nonheap-max');
+		updateMemoryCard('.metric-section.nonheap .memory-metric-card:nth-child(2)', nonheap.committed, 'MB', 'nonheap-committed', nonheap.max, true);
+		updateMemoryCard('.metric-section.nonheap .memory-metric-card:nth-child(3)', nonheap.used, 'MB', 'nonheap-used', nonheap.max, true);
+
+		// Update calculated values for non-heap
+		const nonheapFreeCommitted = nonheap.committed - nonheap.used;
+		const nonheapFreeNotCommitted = nonheap.max - nonheap.committed;
+		const nonheapToOOM = nonheap.max - nonheap.used;
+
+		document.querySelector('.metric-section.nonheap .memory-metric-card:nth-child(4) .metric-value').textContent = `${formatMemory(nonheapFreeCommitted)} MB`;
+		document.querySelector('.metric-section.nonheap .memory-metric-card:nth-child(5) .metric-value').textContent = `${formatMemory(nonheapFreeNotCommitted)} MB`;
+		document.querySelector('.metric-section.nonheap .memory-metric-card:nth-child(6) .metric-value').textContent = `${formatMemory(nonheapToOOM)} MB`;
+
+		// Update notifications
+		const heapUsedMB = formatMemory(heap.used);
+		const heapCommittedMB = formatMemory(heap.committed);
+		const heapMaxMB = formatMemory(heap.max);
+		const heapToOOMMB = formatMemory(heapToOOM);
+
+		document.querySelector('.memory-notifications .notification.info .message').textContent =
+			`The application is using about ${heapUsedMB} MB of heap memory, with ${heapCommittedMB} MB committed, and a maximum heap limit of ${heapMaxMB} MB.`;
+
+		document.querySelector('.memory-notifications .notification.warning .message').textContent =
+			`It can still allocate up to ${heapToOOMMB} MB of heap before hitting an OutOfMemoryError.`;
+
+		console.log('Memory metrics updated with real data');
 	}
 </script>
 </body>
