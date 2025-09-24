@@ -29,6 +29,10 @@
 			border-radius: 10px;
 			margin-bottom: 20px;
 			backdrop-filter: blur(10px);
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 15px;
 		}
 		.metrics-grid {
 			display: grid;
@@ -98,9 +102,11 @@
 		}
 		.status {
 			text-align: center;
-			padding: 10px;
-			margin-bottom: 20px;
+			padding: 8px 12px;
 			border-radius: 5px;
+			flex: 1;
+			min-width: 200px;
+			font-size: 0.9em;
 		}
 		.status.success {
 			background: rgba(76, 175, 80, 0.3);
@@ -307,6 +313,13 @@
 			font-weight: 500;
 		}
 
+		.historical-values .unchanged {
+			color: #FFFFFF;  /* White color for no change */
+			background: rgba(255, 255, 255, 0.1);  /* Neutral white background */
+			font-weight: 400;  /* Normal weight */
+			opacity: 0.8;  /* Slightly transparent to indicate neutral state */
+		}
+
 		.memory-notifications {
 			margin: 20px 0;
 		}
@@ -447,7 +460,7 @@
 		<button id="refreshBtn" onclick="refreshMetrics()">🔄 Refresh All</button>
 		<button id="autoRefreshBtn" onclick="toggleAutoRefresh()">⏰ Auto Refresh (OFF)</button>
 		<span>Interval: </span>
-		<input type="number" id="interval" value="5" min="1" max="60" style="width: 60px"> seconds
+		<input type="number" id="interval" value="10" min="1" max="60" style="width: 60px"> seconds
 		<span id="countdownDisplay" style="margin-left: 15px; color: #FFD700; font-weight: bold;"></span>
 	</div>
 
@@ -459,14 +472,13 @@
 	</div>
 
 	<!-- Configuration -->
-	<div class="config">
+	<div class="config" id="panel-config">
 		<label>Actuator URL:</label>
 		<input type="text" id="baseUrl" value="http://localhost:8081" placeholder="http://localhost:8081">
 		<button onclick="updateBaseUrl()">Connect</button>
+		<!-- Status -->
+		<div id="status" class="status"></div>
 	</div>
-
-	<!-- Status -->
-	<div id="status" class="status"></div>
 
 	<!-- Tab Content -->
 	<div id="overviewTab" class="tab-content active">
@@ -1204,29 +1216,45 @@
 		const now = Date.now();
 		let html = '';
 
-		// Show last 3-4 historical values with trends
+		// Get the starting value (first item in history) for all comparisons
+		const startingValue = history[0].value; // Always reference the first value as "start"
+		const currentHistoryItem = history[history.length - 1]; // Most recent (current)
+
+		// Add the "start" reference first at the top
+		const startFormatted = unit === 'MB' ? formatMemory(startingValue) : startingValue.toFixed(1);
+		html += `<span style="display: block; margin-bottom: 8px; font-weight: bold; color: #FFD700;">${startFormatted} ${unit} start</span>`;
+
+		// Show last 3-4 historical values with trends below (all compared to starting value)
 		const recentHistory = history.slice(-4, -1); // Exclude current value
 
 		recentHistory.forEach((item, index) => {
-			const prevItem = index > 0 ? recentHistory[index - 1] : null;
 			const timeAgo = Math.round((now - item.timestamp) / 1000);
 			const timeLabel = timeAgo < 60 ? `${timeAgo}s` : `${Math.round(timeAgo / 60)}min`;
 
 			let trend = '';
 			let trendClass = '';
+			let differenceText = '';
 
-			if (prevItem) {
-				if (item.value > prevItem.value) {
-					trend = ' ▲';
-					trendClass = 'up';
-				} else if (item.value < prevItem.value) {
-					trend = ' ▼';
-					trendClass = 'down';
-				}
+			// Always compare each historical value against the starting value
+			const difference = item.value - startingValue;
+			const absDifference = Math.abs(difference);
+			const formattedDifference = unit === 'MB' ? formatMemory(absDifference) : absDifference.toFixed(1);
+
+			if (difference > 0) {
+				trend = ' ▲';
+				trendClass = 'up';
+				differenceText = `${formattedDifference} ${unit}${trend}`;
+			} else if (difference < 0) {
+				trend = ' ▼';
+				trendClass = 'down';
+				differenceText = `${formattedDifference} ${unit}${trend}`;
+			} else {
+				// No change from start - show 0.0 with no arrow
+				trendClass = 'unchanged';
+				differenceText = `0.0 ${unit}`;
 			}
 
-			const formattedValue = unit === 'MB' ? formatMemory(item.value) : item.value.toFixed(1);
-			html += `<span class="${trendClass}">${formattedValue} ${unit}${trend} ${timeLabel}</span>`;
+			html += `<span class="${trendClass}">${differenceText} ${timeLabel}</span>`;
 		});
 
 		return html;
