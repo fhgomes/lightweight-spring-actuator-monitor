@@ -1,7 +1,7 @@
 # AI Development Guide for Lightweight Spring Actuator Monitor - Overview of the AI documentation structure and quick start guide
 
-**Version**: 1.0  
-**Last Updated**: 2025-01-16  
+**Version**: 1.1.0  
+**Last Updated**: 2025-09-23
 **Maintainer**: AI Documentation System
 
 This directory contains AI-specific documentation and guidelines for the project.

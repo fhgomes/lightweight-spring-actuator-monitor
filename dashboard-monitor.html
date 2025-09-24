@@ -373,6 +373,66 @@
 		.memory-metric-card.calculated.warning {
 			border-left: 3px solid #FFC107;
 		}
+
+		/* Memory Progress Bars */
+		.memory-progress-bar {
+			width: 100%;
+			height: 8px;
+			background: rgba(255,255,255,0.2);
+			border-radius: 4px;
+			overflow: hidden;
+			margin: 8px 0;
+		}
+
+		.memory-progress-fill {
+			height: 100%;
+			transition: width 0.3s ease;
+			border-radius: 4px;
+		}
+
+		.memory-progress-fill.normal {
+			background: linear-gradient(90deg, #4CAF50, #8BC34A);
+		}
+
+		.memory-progress-fill.warning {
+			background: linear-gradient(90deg, #FFC107, #FF9800);
+		}
+
+		.memory-progress-fill.critical {
+			background: linear-gradient(90deg, #FF5722, #F44336);
+		}
+
+		/* Memory Usage Percentage */
+		.memory-usage-percentage {
+			font-size: 0.9em;
+			color: rgba(255,255,255,0.8);
+			margin: 5px 0;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.usage-indicator {
+			font-weight: bold;
+			padding: 2px 8px;
+			border-radius: 12px;
+			font-size: 0.8em;
+		}
+
+		.usage-indicator.normal {
+			background: rgba(76, 175, 80, 0.2);
+			color: #81C784;
+		}
+
+		.usage-indicator.warning {
+			background: rgba(255, 193, 7, 0.2);
+			color: #FFD54F;
+		}
+
+		.usage-indicator.critical {
+			background: rgba(244, 67, 54, 0.2);
+			color: #E57373;
+		}
 	</style>
 </head>
 <body>
@@ -444,6 +504,13 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Committed Memory (All)</div>
 								<div class="metric-value">2061.3 MB</div>
+								<div class="memory-usage-percentage">
+									<span>27.8% of max</span>
+									<span class="usage-indicator normal">NORMAL</span>
+								</div>
+								<div class="memory-progress-bar">
+									<div class="memory-progress-fill normal" style="width: 27.8%"></div>
+								</div>
 								<div class="historical-values">
 									<span class="down">2058.7 MB ▼ 30s</span>
 									<span class="up">2065.1 MB ▲ 60s</span>
@@ -454,6 +521,13 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Used Memory (All)</div>
 								<div class="metric-value">1012.1 MB</div>
+								<div class="memory-usage-percentage">
+									<span>13.7% of max</span>
+									<span class="usage-indicator normal">NORMAL</span>
+								</div>
+								<div class="memory-progress-bar">
+									<div class="memory-progress-fill normal" style="width: 13.7%"></div>
+								</div>
 								<div class="historical-values">
 									<span class="up">1015.8 MB ▲ 30s</span>
 									<span class="down">1008.3 MB ▼ 60s</span>
@@ -494,6 +568,13 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Committed Memory (Heap)</div>
 								<div class="metric-value">1756.0 MB</div>
+								<div class="memory-usage-percentage">
+									<span>28.6% of heap max</span>
+									<span class="usage-indicator normal">NORMAL</span>
+								</div>
+								<div class="memory-progress-bar">
+									<div class="memory-progress-fill normal" style="width: 28.6%"></div>
+								</div>
 								<div class="historical-values">
 									<span class="down">1750.2 MB ▼ 30s</span>
 									<span class="up">1760.5 MB ▲ 60s</span>
@@ -503,6 +584,13 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Used Memory (Heap)</div>
 								<div class="metric-value">725.8 MB</div>
+								<div class="memory-usage-percentage">
+									<span>11.8% of heap max</span>
+									<span class="usage-indicator normal">NORMAL</span>
+								</div>
+								<div class="memory-progress-bar">
+									<div class="memory-progress-fill normal" style="width: 11.8%"></div>
+								</div>
 								<div class="historical-values">
 									<span class="up">730.2 MB ▲ 30s</span>
 									<span class="down">720.5 MB ▼ 60s</span>
@@ -539,6 +627,13 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Committed Memory (Non-Heap)</div>
 								<div class="metric-value">305.3 MB</div>
+								<div class="memory-usage-percentage">
+									<span>24.2% of non-heap max</span>
+									<span class="usage-indicator normal">NORMAL</span>
+								</div>
+								<div class="memory-progress-bar">
+									<div class="memory-progress-fill normal" style="width: 24.2%"></div>
+								</div>
 								<div class="historical-values">
 									<span class="up">308.5 MB ▲ 30s</span>
 									<span class="up">310.2 MB ▲ 60s</span>
@@ -548,6 +643,13 @@
 							<div class="memory-metric-card">
 								<div class="metric-header">Used Memory (Non-Heap)</div>
 								<div class="metric-value">286.4 MB</div>
+								<div class="memory-usage-percentage">
+									<span>22.7% of non-heap max</span>
+									<span class="usage-indicator normal">NORMAL</span>
+								</div>
+								<div class="memory-progress-bar">
+									<div class="memory-progress-fill normal" style="width: 22.7%"></div>
+								</div>
 								<div class="historical-values">
 									<span class="up">288.7 MB ▲ 30s</span>
 									<span class="up">290.1 MB ▲ 60s</span>

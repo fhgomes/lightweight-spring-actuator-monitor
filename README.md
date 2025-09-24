@@ -226,11 +226,20 @@ If this project helped you, please consider giving it a star! ⭐
 
 ## 📋 Version Control
 
-**Current Version:** v1.1.0  
-**Release Date:** 2025-09-23  
-**Last Updated:** 2025-09-23  
+**Current Version:** v1.2.0  
+**Release Date:** 2025-09-24  
+**Last Updated:** 2025-09-24  
 
 ### Version History
+- **v1.2.0** (2025-09-24) - Dashboard UI/UX enhancements with expert improvements
+  - Added UI/UX elements for aggregated, heap and non-heap memory metrics
+  - Added progress bars showing memory utilization with color-coded status indicators
+  - Added tabular number formatting and hover effects for better readability
+  - Implemented contextual tooltips for technical terms (OutOfMemoryError explanations)
+  - Enhanced section-specific educational notes with color-coded backgrounds
+  - Improved spacing, transitions, and visual hierarchy
+  - Added smooth hover animations for better user experience
+
 - **v1.1.0** (2025-09-23) - Enhanced UI organization and documentation
   - Improved controls layout and accessibility
   - Added detailed "All Metrics" section with Memory and CPU tabs
