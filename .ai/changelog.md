@@ -1,12 +1,33 @@
 # AI Documentation Changelog
 
-**Version**: 1.1.0  
+**Version**: 1.1.1  
 **Last Updated**: 2025-09-23  
 **Maintainer**: AI Documentation System
 
 This document tracks all changes made to the AI documentation structure and content.
 
 ## Version History
+
+### [1.1.1] - 2025-09-23
+
+#### Fixed
+- **Documentation Quality Improvements**
+  - Corrected notification feature descriptions in README.md for clarity
+  - Removed empty bullet point from Visual Customization section
+  - Enhanced readability and consistency of feature descriptions
+
+#### Refactored
+- **AI Instructions Structure**
+  - Streamlined `.ai-instructions.md` to serve as a clean entry point
+  - Eliminated redundancy with detailed `.ai/` directory documentation
+  - Maintained essential quick reference while preventing maintenance drift
+  - Enhanced navigation to comprehensive AI guidance files
+
+#### Quality
+- **Documentation Consistency**
+  - Improved alignment between entry-level and detailed documentation
+  - Reduced maintenance burden by centralizing detailed guidance
+  - Enhanced user experience with clearer documentation hierarchy
 
 ### [1.1.0] - 2025-09-23
 
@@ -109,6 +130,7 @@ Example: 1.1.0 means:
 
 ## Version History Summary
 
+- **v1.1.1** (2025-09-23): Documentation quality improvements and AI instructions refactoring
 - **v1.1.0** (2025-09-23): Standardized documentation and enhanced PR/review guidelines
 - **v1.0.0** (2025-01-16): Initial comprehensive AI documentation structure
 - **Future versions**: Will follow SemVer pattern (MAJOR.MINOR.PATCH)

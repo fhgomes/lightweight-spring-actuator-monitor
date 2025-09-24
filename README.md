@@ -72,8 +72,8 @@ Check out our live development progress on the [GitHub Project Board](https://gi
 - **Non-Heap Metrics** - Detailed Metaspace and Code Cache monitoring
 
 ### Alerts
-- **Notification Support** - Send alerts to Browser
-- **Notification Support** - Send alerts to other tools, Slack, Discord, or other messaging services
+- **Browser Notifications** - Send alerts directly to your browser
+- **Third-Party Integrations** - Send alerts to Slack, Discord, or other messaging services
 - **Customizable Alerts** - Set thresholds for each metric and receive alerts when they're exceeded
 
 ### Advanced Analytics
@@ -96,7 +96,7 @@ Check out our live development progress on the [GitHub Project Board](https://gi
 - **Custom Colors** - Choose your own colors for each metric
 - **Custom Icons** - Replace the default icons with your own
 - **Custom Logos** - Add your own company logo to the dashboard
-- 
+
 ### Customization Features
 - **Configurable Metrics** - Choose which metrics to display and track
 - **Custom Thresholds** - Set alert levels based on your application's needs
