@@ -226,11 +226,17 @@ If this project helped you, please consider giving it a star! ⭐
 
 ## 📋 Version Control
 
-**Current Version:** v1.0.0  
-**Release Date:** 2025-01-16  
-**Last Updated:** 2025-01-16  
+**Current Version:** v1.1.0  
+**Release Date:** 2025-09-23  
+**Last Updated:** 2025-09-23  
 
 ### Version History
+- **v1.1.0** (2025-09-23) - Enhanced UI organization and documentation
+  - Improved controls layout and accessibility
+  - Added detailed "All Metrics" section with Memory and CPU tabs
+  - Enhanced documentation with semantic versioning
+  - Standardized contribution guidelines
+  
 - **v1.0.0** (2025-01-16) - Initial release with core monitoring features
   - Real-time JVM memory, CPU, and GC metrics
   - Zero-dependency HTML dashboard
