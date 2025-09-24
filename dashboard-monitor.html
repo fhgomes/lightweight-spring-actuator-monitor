@@ -222,6 +222,157 @@
 			margin: 20px 0;
 			border: 2px dashed rgba(255,255,255,0.2);
 		}
+
+		/* Memory Metrics Styles */
+		.memory-metrics {
+			padding: 25px 20px;
+		}
+
+		.metric-section {
+			background: rgba(255,255,255,0.1);
+			border-radius: 15px;
+			padding: 20px;
+			margin-bottom: 35px;
+		}
+
+		.metric-section h3 {
+			color: #FFD700;
+			margin-bottom: 20px;
+			font-size: 1.3em;
+			border-bottom: 1px solid rgba(255,255,255,0.2);
+			padding-bottom: 10px;
+		}
+
+		.memory-metric-card {
+			background: rgba(255,255,255,0.15);
+			padding: 15px;
+			border-radius: 10px;
+			margin-bottom: 15px;
+			backdrop-filter: blur(5px);
+		}
+
+		.memory-metric-card .metric-header {
+			color: #fff;
+			font-size: 1.1em;
+			margin-bottom: 10px;
+		}
+
+		.memory-metric-card .metric-value {
+			font-size: 1.8em;
+			font-weight: bold;
+			color: #7DCEA0;  /* Softer green */
+			margin-bottom: 5px;
+			font-variant-numeric: tabular-nums; /* Numbers alinhados */
+			letter-spacing: 0.5px;
+		}
+
+		.memory-metric-card.warning .metric-value {
+			color: #F4D03F;  /* Softer yellow */
+		}
+
+		.memory-metric-card.danger .metric-value {
+			color: #F5B041;  /* Softer orange */
+		}
+
+		.historical-values {
+			font-size: 0.9em;
+			color: rgba(255,255,255,0.8);
+			margin-top: 8px;
+		}
+
+		.historical-values span {
+			display: inline-block;
+			margin-right: 15px;
+			padding: 4px 10px;
+			border-radius: 12px;
+			background: rgba(255,255,255,0.15);
+			border: 1px solid rgba(255,255,255,0.1);
+			transition: all 0.2s ease;
+		}
+
+		.historical-values span:hover {
+			background: rgba(255,255,255,0.25);
+			transform: scale(1.05);
+		}
+
+		.historical-values .up {
+			color: #F5B041;  /* Slightly stronger orange */
+			background: rgba(244, 67, 54, 0.2);  /* Slightly stronger red background */
+			font-weight: 500;
+		}
+
+		.historical-values .down {
+			color: #82E0AA;  /* Brighter, more vibrant green */
+			background: rgba(76, 175, 80, 0.2);  /* Slightly stronger green background */
+			font-weight: 500;
+		}
+
+		.memory-notifications {
+			margin: 20px 0;
+		}
+
+		.notification {
+			background: rgba(255,255,255,0.1);
+			padding: 15px;
+			border-radius: 10px;
+			margin-bottom: 10px;
+			display: flex;
+			align-items: center;
+			transition: all 0.3s ease;
+			cursor: pointer;
+		}
+
+		.notification:hover {
+			background: rgba(255,255,255,0.15);
+			transform: translateX(5px);
+		}
+
+		.notification .icon {
+			font-size: 1.5em;
+			margin-right: 15px;
+		}
+
+		.notification.info {
+			border-left: 4px solid #2196F3;
+		}
+
+		.notification.warning {
+			border-left: 4px solid #FFC107;
+		}
+
+		.memory-footer {
+			margin-top: 30px;
+			padding: 15px;
+			background: rgba(0,0,0,0.2);
+			border-radius: 10px;
+		}
+
+		.memory-footer .note {
+			color: rgba(255,255,255,0.7);
+			font-size: 0.9em;
+			margin: 0;
+		}
+
+		/* Metric Grid Layout */
+		.metric-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 15px;
+		}
+
+		.metric-section.aggregated {
+			border: 1px solid rgba(255,255,255,0.2);
+			background: rgba(255,255,255,0.15);
+		}
+
+		/* Calculated Values Style */
+		.memory-metric-card.calculated {
+			border-left: 3px solid #2196F3;
+		}
+
+		.memory-metric-card.calculated.warning {
+			border-left: 3px solid #FFC107;
+		}
 	</style>
 </head>
 <body>
@@ -271,11 +422,164 @@
 			</div>
 
 			<div id="memoryMetricsTab" class="inner-tab-content active">
-				<div class="coming-soon">
-					🚧 Coming Soon: Detailed Memory Metrics 🚧
-					<p style="font-size: 0.8em; margin-top: 10px; color: rgba(255,255,255,0.8);">
-						We're working on bringing you comprehensive memory analytics!
-					</p>
+				<div class="memory-metrics">
+					<div class="metric-section aggregated">
+						<h3>🔍 Aggregated (All Areas)</h3>
+						<div class="section-note">
+							<p style="margin: 0 0 15px 0; padding: 10px; background: rgba(255,215,0,0.1); border-radius: 8px; font-size: 0.9em; color: rgba(255,255,255,0.8);">
+								💡 <strong>Note:</strong> These values combine both heap and non-heap memory areas for a complete JVM memory overview.
+							</p>
+						</div>
+						<div class="metric-grid">
+							<div class="memory-metric-card">
+								<div class="metric-header">Max Memory (All)</div>
+								<div class="metric-value">7408.0 MB</div>
+								<div class="historical-values">
+									<span class="down">7390.5 MB ▼ 30s</span>
+									<span class="up">7420.2 MB ▲ 60s</span>
+									<span class="down">7380.8 MB ▼ 5min</span>
+									<span>7408.0 MB start</span>
+								</div>
+							</div>
+							<div class="memory-metric-card">
+								<div class="metric-header">Committed Memory (All)</div>
+								<div class="metric-value">2061.3 MB</div>
+								<div class="historical-values">
+									<span class="down">2058.7 MB ▼ 30s</span>
+									<span class="up">2065.1 MB ▲ 60s</span>
+									<span>2061.3 MB 5min</span>
+									<span>2000.0 MB start</span>
+								</div>
+							</div>
+							<div class="memory-metric-card">
+								<div class="metric-header">Used Memory (All)</div>
+								<div class="metric-value">1012.1 MB</div>
+								<div class="historical-values">
+									<span class="up">1015.8 MB ▲ 30s</span>
+									<span class="down">1008.3 MB ▼ 60s</span>
+									<span class="up">1020.5 MB ▲ 5min</span>
+									<span>800.0 MB start</span>
+								</div>
+							</div>
+							<div class="memory-metric-card calculated">
+								<div class="metric-header">Free (Committed - Used)</div>
+								<div class="metric-value">1049.2 MB</div>
+							</div>
+							<div class="memory-metric-card calculated">
+								<div class="metric-header">Free Not Committed</div>
+								<div class="metric-value">5346.7 MB</div>
+							</div>
+							<div class="memory-metric-card calculated warning">
+								<div class="metric-header" title="Memória máxima que pode ser alocada antes de OutOfMemoryError">To OutOfMemoryError</div>
+								<div class="metric-value">6395.9 MB</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="metric-section heap">
+						<h3>📦 Heap Area</h3>
+						<div class="section-note">
+							<p style="margin: 0 0 15px 0; padding: 10px; background: rgba(76,175,80,0.1); border-radius: 8px; font-size: 0.9em; color: rgba(255,255,255,0.8);">
+								🎯 <strong>Note:</strong> Heap values directly correspond to your JVM -Xmx setting. This is where your application objects live.
+							</p>
+						</div>
+						<div class="metric-grid">
+							<div class="memory-metric-card">
+								<div class="metric-header">Max Memory (Heap)</div>
+								<div class="metric-value">6144.0 MB</div>
+								<div class="historical-values">
+									<span>6144.0 MB (constant)</span>
+								</div>
+							</div>
+							<div class="memory-metric-card">
+								<div class="metric-header">Committed Memory (Heap)</div>
+								<div class="metric-value">1756.0 MB</div>
+								<div class="historical-values">
+									<span class="down">1750.2 MB ▼ 30s</span>
+									<span class="up">1760.5 MB ▲ 60s</span>
+									<span>1756.0 MB 5min</span>
+								</div>
+							</div>
+							<div class="memory-metric-card">
+								<div class="metric-header">Used Memory (Heap)</div>
+								<div class="metric-value">725.8 MB</div>
+								<div class="historical-values">
+									<span class="up">730.2 MB ▲ 30s</span>
+									<span class="down">720.5 MB ▼ 60s</span>
+									<span class="up">740.0 MB ▲ 5min</span>
+								</div>
+							</div>
+							<div class="memory-metric-card calculated">
+								<div class="metric-header">Free (Committed - Used)</div>
+								<div class="metric-value">1030.2 MB</div>
+							</div>
+							<div class="memory-metric-card calculated">
+								<div class="metric-header">Free Not Committed</div>
+								<div class="metric-value">4388.0 MB</div>
+							</div>
+							<div class="memory-metric-card calculated warning">
+								<div class="metric-header" title="Memória máxima que pode ser alocada no heap antes de OutOfMemoryError">To OutOfMemoryError</div>
+								<div class="metric-value">5418.2 MB</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="metric-section nonheap">
+						<h3>🧰 Non-Heap Area</h3>
+						<div class="section-note">
+							<p style="margin: 0 0 15px 0; padding: 10px; background: rgba(244,67,54,0.1); border-radius: 8px; font-size: 0.9em; color: rgba(255,255,255,0.8);">
+								🔧 <strong>Note:</strong> Non-heap includes Metaspace (class metadata), CodeCache (compiled code), and other JVM internal structures.
+							</p>
+						</div>
+						<div class="metric-grid">
+							<div class="memory-metric-card">
+								<div class="metric-header">Max Memory (Non-Heap)</div>
+								<div class="metric-value">1264.0 MB</div>
+							</div>
+							<div class="memory-metric-card">
+								<div class="metric-header">Committed Memory (Non-Heap)</div>
+								<div class="metric-value">305.3 MB</div>
+								<div class="historical-values">
+									<span class="up">308.5 MB ▲ 30s</span>
+									<span class="up">310.2 MB ▲ 60s</span>
+									<span class="up">315.0 MB ▲ 5min</span>
+								</div>
+							</div>
+							<div class="memory-metric-card">
+								<div class="metric-header">Used Memory (Non-Heap)</div>
+								<div class="metric-value">286.4 MB</div>
+								<div class="historical-values">
+									<span class="up">288.7 MB ▲ 30s</span>
+									<span class="up">290.1 MB ▲ 60s</span>
+									<span class="up">295.0 MB ▲ 5min</span>
+								</div>
+							</div>
+							<div class="memory-metric-card calculated">
+								<div class="metric-header">Free (Committed - Used)</div>
+								<div class="metric-value">18.9 MB</div>
+							</div>
+							<div class="memory-metric-card calculated">
+								<div class="metric-header">Free Not Committed</div>
+								<div class="metric-value">958.7 MB</div>
+							</div>
+							<div class="memory-metric-card calculated warning">
+								<div class="metric-header" title="Memória máxima que pode ser alocada no non-heap antes de OutOfMemoryError">To OutOfMemoryError</div>
+								<div class="metric-value">977.6 MB</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="memory-notifications">
+						<div class="notification info">
+							<span class="icon">🧠</span>
+							<span class="message">The application is using about 725.8 MB of heap memory, with 1756.0 MB committed, and a maximum heap limit of 6144.0 MB.</span>
+						</div>
+						<div class="notification warning">
+							<span class="icon">⚠️</span>
+							<span class="message">It can still allocate up to 5418.2 MB of heap before hitting an OutOfMemoryError.</span>
+						</div>
+					</div>
+
 				</div>
 			</div>
 
@@ -382,7 +686,7 @@
 	<div class="footer-section">
 		<h3>Version</h3>
 		<p>
-			<strong>v1.0.0</strong> - Released 2025-01-16
+			<strong>v1.2.0</strong> - Released 2025-09-24
 		</p>
 	</div>
 	<div class="footer-section">
