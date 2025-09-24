@@ -444,10 +444,11 @@
 
 	<!-- Controls -->
 	<div class="controls config">
-		<button id="refreshBtn" onclick="refreshMetrics()">🔄 Refresh</button>
+		<button id="refreshBtn" onclick="refreshMetrics()">🔄 Refresh All</button>
 		<button id="autoRefreshBtn" onclick="toggleAutoRefresh()">⏰ Auto Refresh (OFF)</button>
 		<span>Interval: </span>
 		<input type="number" id="interval" value="5" min="1" max="60" style="width: 60px"> seconds
+		<span id="countdownDisplay" style="margin-left: 15px; color: #FFD700; font-weight: bold;"></span>
 	</div>
 
 	<!-- Tabs -->
@@ -851,6 +852,9 @@
 	let autoRefreshInterval = null;
 	let isAutoRefreshOn = false;
 	let memoryHistory = {};
+	let countdownInterval = null;
+	let countdownSeconds = 0;
+	let refreshIntervalMs = 5000;
 
 	const metrics = [
 		{
@@ -967,6 +971,12 @@
 	}
 
 	async function refreshMetrics() {
+		// Stop countdown during refresh to avoid interference
+		if (countdownInterval) {
+			clearInterval(countdownInterval);
+			countdownInterval = null;
+		}
+
 		const status = document.getElementById('status');
 		status.textContent = '🔄 Loading metrics...';
 		status.className = 'status';
@@ -993,26 +1003,96 @@
 			await refreshMemoryMetrics();
 		}
 
+		// Restart countdown after manual refresh if auto-refresh is enabled
+		if (isAutoRefreshOn) {
+			startCountdown();
+		}
+
 		// Return success status for use by other functions
 		return successCount > 0;
 	}
 
+	function updateCountdownDisplay() {
+		const countdownDisplay = document.getElementById('countdownDisplay');
+		if (isAutoRefreshOn && countdownSeconds > 0) {
+			countdownDisplay.textContent = `⏰ Next refresh in... ${countdownSeconds}s`;
+		} else {
+			countdownDisplay.textContent = '';
+		}
+	}
+
+	function startCountdown() {
+		// Always stop existing countdown first to prevent duplicates
+		if (countdownInterval) {
+			clearInterval(countdownInterval);
+			countdownInterval = null;
+		}
+
+		countdownSeconds = Math.floor(refreshIntervalMs / 1000);
+		updateCountdownDisplay();
+
+		countdownInterval = setInterval(() => {
+			countdownSeconds--;
+			if (countdownSeconds > 0) {
+				updateCountdownDisplay();
+			} else {
+				clearInterval(countdownInterval);
+				countdownInterval = null;
+			}
+		}, 1000);
+	}
+
+	function stopCountdown() {
+		if (countdownInterval) {
+			clearInterval(countdownInterval);
+			countdownInterval = null;
+		}
+		countdownSeconds = 0;
+		updateCountdownDisplay(); // Clear the countdown display
+	}
+
+	function stopAutoRefresh() {
+		if (autoRefreshInterval) {
+			clearInterval(autoRefreshInterval);
+			autoRefreshInterval = null;
+		}
+		stopCountdown();
+	}
+
+	function startAutoRefresh() {
+		// Always stop existing intervals first to prevent duplicates
+		stopAutoRefresh();
+
+		refreshIntervalMs = parseInt(document.getElementById('interval').value) * 1000;
+		autoRefreshInterval = setInterval(() => {
+			refreshMetrics().then(() => {
+				if (isAutoRefreshOn) {
+					startCountdown();
+				}
+			});
+		}, refreshIntervalMs);
+
+		// Do initial refresh
+		refreshMetrics().then(() => {
+			if (isAutoRefreshOn) {
+				startCountdown();
+			}
+		});
+	}
+
 	function toggleAutoRefresh() {
 		const btn = document.getElementById('autoRefreshBtn');
-		const intervalInput = document.getElementById('interval');
 
 		if (isAutoRefreshOn) {
-			clearInterval(autoRefreshInterval);
+			stopAutoRefresh();
 			btn.textContent = '⏰ Auto Refresh (OFF)';
 			btn.classList.remove('active');
 			isAutoRefreshOn = false;
 		} else {
-			const interval = parseInt(intervalInput.value) * 1000;
-			autoRefreshInterval = setInterval(refreshMetrics, interval);
 			btn.textContent = '⏰ Auto Refresh (ON)';
 			btn.classList.add('active');
 			isAutoRefreshOn = true;
-			refreshMetrics(); // First refresh
+			startAutoRefresh();
 		}
 	}
 
@@ -1026,6 +1106,17 @@
 	document.getElementById('baseUrl').addEventListener('keypress', function(e) {
 		if (e.key === 'Enter') {
 			updateBaseUrl();
+		}
+	});
+
+	// Handle interval input changes - reset countdown when user changes interval
+	document.getElementById('interval').addEventListener('input', function(e) {
+		const newInterval = parseInt(e.target.value);
+		if (newInterval >= 1 && newInterval <= 60) {
+			// If auto-refresh is enabled, restart it with the new interval
+			if (isAutoRefreshOn) {
+				startAutoRefresh(); // This will handle all cleanup and restart with new interval
+			}
 		}
 	});
 
