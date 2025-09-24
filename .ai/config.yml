@@ -1,100 +1,42 @@
-# AI Configuration Settings - Machine-readable preferences for AI tools
-# Version: 1.0
-# Last Updated: 2025-01-16
-# Maintainer: AI Documentation System
+version: 1.0.0
 
-# Project Preferences
-project:
-  name: "Lightweight Spring Actuator Monitor"
-  type: "single-file-application"
-  primary_language: "javascript"
-  architecture: "standalone"
-  privacy_focus: true
+# Development Standards Configuration
+standards:
+  commit_pattern:
+    format: "<type>: <description> [<reference>]"
+    types:
+      - feat
+      - fix
+      - docs
+      - style
+      - refactor
+      - test
+      - chore
+    references:
+      wip: "refs #<issue>:"
+      completion:
+        - "fixes #<issue>:"
+        - "closes #<issue>:"
+        - "resolves #<issue>:"
 
-# Code Style
-style:
-  javascript:
-    format: "es6+"
-    strict_mode: true
-    prefer_const: true
-    max_line_length: 100
+  branch_pattern:
+    format: "<type>/<issue-number>_<description>"
+    separator: "_"
+    types:
+      - feat
+      - fix
+      - docs
+      - style
+      - refactor
+      - test
+      - chore
 
-  html:
-    format: "html5"
-    semantic: true
-    accessibility: true
-
-  css:
-    methodology: "bem"
-    responsive: true
-    mobile_first: true
-
-# Documentation
-documentation:
-  language: "en"
-  tone: "technical_friendly"
-  include_examples: true
-  code_comments: true
-  update_screenshots: true
-
-# Security & Privacy
-security:
-  data_storage: false
-  client_side_only: true
-  cors_required: "optional"
-  secure_defaults: true
-  sanitize_input: true
-  production_guidelines: true
-  data_collection: false
-  cookies_usage: false
-  third_party_services: false
-
-# Performance
-performance:
-  max_refresh_rate: 5000
-  debounce_inputs: true
-  optimize_dom: true
-  cache_selectors: true
-
-# Browser Support
-browsers:
-  minimum_support:
-    chrome: "last 2 versions"
-    firefox: "last 2 versions"
-    safari: "last 2 versions"
-    edge: "last 2 versions"
-
-# Development
-development:
-  linting: true
-  formatting: true
-  browser_testing: true
-  accessibility_testing: true
-
-# Features
-features:
-  metric_types:
-    - memory
-    - cpu
-    - threads
-    - garbage_collection
-  auto_refresh: true
-  educational_content: true
-  responsive_design: true
-
-# Error Handling
-error_handling:
-  graceful_degradation: true
-  user_feedback: true
-  fallback_options: true
-
-# Internationalization (future consideration)
-i18n:
-  default_language: "en"
-  support_planned: false
-
-# Testing
-testing:
-  unit_tests: false  # Currently no unit tests
-  integration_tests: true  # Manual browser testing
-  accessibility_tests: true
+# AI Assistant Configuration
+ai_preferences:
+  code_style: "clean and documented"
+  documentation_style: "detailed with examples"
+  response_format: "concise and actionable"
+  primary_focus:
+    - code quality
+    - user privacy
+    - educational value

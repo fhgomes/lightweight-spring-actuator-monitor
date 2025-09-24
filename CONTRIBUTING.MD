@@ -63,16 +63,36 @@ Since this is a simple HTML/CSS/JavaScript project, setup is minimal:
 
 ## 📝 Commit Guidelines
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/) specification:
+We follow [Conventional Commits](https://www.conventionalcommits.org/) specification with additional issue referencing:
+
+### Branch Naming Convention
+```
+<type>/<issue-number>_<description>
+```
+
+Examples:
+- `feat/42_dark_mode`
+- `fix/7_memory_leak`
+- `docs/13_readme_update`
 
 ### Commit Message Format
 ```
-<type>(<scope>): <subject>
-
-<body>
-
-<footer>
+<type>: <description> [<reference>]
 ```
+
+#### Issue References
+- For work in progress:
+  ```
+  feat: implement dark mode [refs #42]
+  feat: add initial theme support refs #42: still working on color scheme
+  ```
+
+- For completing work:
+  ```
+  fix: resolve memory calculation [fixes #7]
+  docs: update browser support [closes #13]
+  feat: add CPU chart [resolves #15]
+  ```
 
 ### Types
 - **feat**: New feature
@@ -85,33 +105,29 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) specifica
 
 ### Examples
 ```bash
-feat: add CPU usage trending chart
+feat: add CPU usage trending chart [refs #15]
 
 Implements a mini chart showing CPU usage over the last 10 data points
 to help identify usage patterns and spikes.
 
-Fixes #15
-
-fix: resolve memory leak in auto-refresh timer
+feat: complete CPU monitoring implementation [fixes #15]
 
 The timer wasn't being properly cleared when switching tabs,
 causing multiple timers to run simultaneously.
 
-Closes #23
-
-docs: update README with browser compatibility info
+docs: update README with browser compatibility info [refs #18]
 
 Adds section explaining which browsers are supported and
 known limitations with older versions.
-
-Refs #18
 ```
 
-### Linking to Issues
-- `Fixes #123` - Closes issue #123
-- `Closes #123` - Closes issue #123
-- `Resolves #123` - Closes issue #123
-- `Refs #123` - References issue #123 without closing
+### Issue Reference Keywords
+- `[refs #123]` or `refs #123:` - References issue without closing
+- `[fixes #123]` or `fixes #123:` - Closes issue
+- `[closes #123]` or `closes #123:` - Closes issue
+- `[resolves #123]` or `resolves #123:` - Closes issue
+
+Note: The reference can be placed either in square brackets at the end of the first line or with a colon after the reference at the start of the description.
 
 ## 🔄 Pull Request Process
 

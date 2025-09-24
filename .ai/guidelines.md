@@ -1,75 +1,60 @@
-# Coding Guidelines for AI Assistance - Detailed coding standards for JavaScript, HTML, and CSS
+# Development Guidelines
 
-**Version**: 1.0  
-**Last Updated**: 2025-01-16  
-**Maintainer**: AI Documentation System
+## 📝 Versioning and Commit Standards
 
-## JavaScript Guidelines
+### Branch Naming Convention
+```
+<type>/<issue-number>_<description>
+```
 
-### Code Style
-- Use ES6+ features but ensure broad browser compatibility
-- Prefer const over let, avoid var
-- Use meaningful variable and function names
-- Implement error handling for all network requests
-- Use async/await for asynchronous operations
+Example:
+- `feat/42_dark_mode`
+- `fix/7_memory_leak`
+- `docs/13_readme_update`
 
-### Performance
-- Minimize DOM operations
-- Use requestAnimationFrame for animations
-- Implement debouncing for frequent operations
-- Cache DOM selections
-- Use efficient selectors
+Note: Always use underscore (_) to separate words in branch names for better readability.
 
-### Security
-- Sanitize all user inputs
-- Use secure defaults for CORS settings
-- Implement proper error handling
-- Avoid eval() and similar unsafe functions
-- Use Content Security Policy headers
+### Commit Message Format
+```
+<type>: <description> [<reference>]
+```
 
-## HTML Guidelines
+#### Issue References:
+- Work in progress: `[refs #7]` or `refs #7: description`
+- Completing work: 
+  - `[fixes #7]` or `fixes #7: description`
+  - `[closes #7]` or `closes #7: description`
+  - `[resolves #7]` or `resolves #7: description`
 
-### Structure
-- Use semantic HTML5 elements
-- Maintain proper heading hierarchy
-- Include ARIA attributes where needed
-- Keep the structure logical and clear
+#### Types:
+- `feat` - New features
+- `fix` - Bug fixes
+- `docs` - Documentation changes
+- `style` - Formatting, missing semicolons, etc.
+- `refactor` - Code restructuring
+- `test` - Adding/updating tests
+- `chore` - Maintenance tasks
 
-### Accessibility
-- Ensure proper contrast ratios
-- Include alt text for images
-- Use ARIA labels appropriately
-- Ensure keyboard navigation works
-- Support screen readers
+#### Examples:
+```
+feat: add dark mode support [refs #42]
+fix: correct memory calculation [fixes #7]
+docs: update installation guide [closes #13]
+style: format code according to guidelines [refs #15]
+```
 
-## CSS Guidelines
+## 🔄 Version Control Workflow
 
-### Architecture
-- Follow BEM methodology
-- Use CSS variables for theming
-- Maintain mobile-first approach
-- Keep specificity low
-- Use logical property groups
+1. Always branch from `main`
+2. Keep branches focused on single issues
+3. Reference issues in commits and PRs
+4. Use meaningful commit messages
+5. Squash commits before merging when appropriate
 
-### Performance
-- Avoid deeply nested selectors
-- Minimize use of !important
-- Use efficient selectors
-- Consider paint performance
-- Optimize animations
+## 📋 Pull Request Guidelines
 
-## Documentation Guidelines
-
-### Code Comments
-- Document complex logic
-- Explain "why" not just "what"
-- Use JSDoc for functions
-- Keep comments current
-- Include examples for complex operations
-
-### README Updates
-- Keep installation steps clear
-- Document all configuration options
-- Include troubleshooting guides
-- Update screenshots when needed
-- Maintain clear examples
+1. Use PR templates
+2. Link related issues
+3. Include before/after screenshots for UI changes
+4. Update documentation if needed
+5. Ensure all checks pass
