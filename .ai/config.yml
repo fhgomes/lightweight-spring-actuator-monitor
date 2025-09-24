@@ -1,4 +1,4 @@
-version: 1.0.0
+version: "1.1.0"  # SemVer - Updated 2025-09-23: Enhanced documentation and PR guidelines
 
 # Development Standards Configuration
 standards:
@@ -71,6 +71,14 @@ standards:
         - "README updated if needed"
         - "Code comments added where necessary"
         - "JSDoc for public functions"
+
+  versioning:
+    pattern: "MAJOR.MINOR.PATCH"
+    rules:
+      - "MAJOR: Breaking changes"
+      - "MINOR: New features, backwards compatible"
+      - "PATCH: Bug fixes, backwards compatible"
+    example: "2.1.0"
 
 # AI Assistant Configuration
 ai_preferences:

@@ -2,6 +2,26 @@
 
 ## 📝 Versioning and Commit Standards
 
+### Semantic Versioning
+We follow [Semantic Versioning 2.0.0](https://semver.org/):
+
+```
+MAJOR.MINOR.PATCH
+
+Example: 1.1.0
+```
+
+- **MAJOR**: Incompatible API changes
+- **MINOR**: New features (backwards-compatible)
+- **PATCH**: Bug fixes (backwards-compatible)
+
+Version numbers should never contain leading zeros.
+
+### Version Bumping Guidelines
+- Breaking changes -> MAJOR bump (e.g., 1.1.0 -> 2.0.0)
+- New features -> MINOR bump (e.g., 1.0.0 -> 1.1.0)
+- Bug fixes -> PATCH bump (e.g., 1.1.0 -> 1.1.1)
+
 ### Branch Naming Convention
 ```
 <type>/<issue-number>_<description>

@@ -1,4 +1,7 @@
 # AI Prompt Templates - Reusable AI prompt templates for common tasks
+# Version: 1.1.0  # Following Semantic Versioning (MAJOR.MINOR.PATCH)
+# Last Updated: 2025-09-23
+# Changes: Added code review and PR workflow templates, updated commit message format
 
 feature_enhancement: |
   Consider enhancing the {feature_name} with these requirements:
