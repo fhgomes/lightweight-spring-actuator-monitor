@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(docker *)",
+      "Bash(docker exec:*)",
+      "Bash(git *:*)",
+      "Bash(git *)",
+      "Bash(gh auth:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git remote get-url:*)",
+      "Bash(test:*)",
+      "Bash(git add:*)",
+      "Bash(liquibase *)",
+      "Bash(./mvnw *)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
