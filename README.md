@@ -47,6 +47,9 @@ Perfect for developers who value pragmatic solutions over enterprise complexity.
 - **Transparent Code:** Single HTML file with readable, unobfuscated code
 - **CORS Aware:** Respects your Spring Boot application's CORS settings
 - **Network Safety:** Only connects to the Actuator URL you specify
+- **Protocol Flexibility:** Supports HTTP, HTTPS, and HTTPS with invalid certificates
+- **Mixed Content Handling:** Automatically handles HTTPS-to-HTTP fallbacks with security warnings
+- **Certificate Error Recovery:** Provides clear guidance and retry options for certificate issues
 
 ## ✨ Current Features
 

@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2025-10-05
+
+### Added
+- Enhanced HTTP/HTTPS connectivity support for remote deployments
+- Automatic protocol detection and URL normalization
+- Mixed content handling with HTTPS fallback for HTTP requests from HTTPS pages
+- Certificate error detection and user-friendly error messages
+- Retry mechanisms with protocol switching options (HTTP ↔ HTTPS)
+- Comprehensive test scenarios documentation for different connectivity cases
+- Visual status indicators for connection issues with actionable solutions
+
+### Changed  
+- Improved fetch error handling with detailed error messages and recovery options
+- Enhanced status display with specific guidance for mixed content and certificate issues
+- Updated all API calls to use the new fetchWithFallback mechanism
+
+### Fixed
+- Mixed content blocking issues when accessing HTTP endpoints from HTTPS pages
+- Certificate validation problems with self-signed or invalid HTTPS certificates
+- Connection failures now provide clear next steps instead of generic error messages
+
+### Improved
+- Deployment flexibility - now works seamlessly on GitHub Pages and other HTTPS hosting
+- User experience with automatic protocol switching and clear error recovery paths
+- Security awareness with appropriate warnings for protocol downgrades
+- Remote server compatibility across different HTTP/HTTPS configurations
+
 ## [1.3.0] - 2025-09-24
 
 ### Added
@@ -101,6 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Auto-refresh functionality
 - Progress bar visualizations
 
+[1.4.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.4.0
 [1.3.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.3.0
 [1.2.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.2.0
 [1.1.0]: https://github.com/fhgomes/lightweight-spring-actuator-monitor/releases/tag/v1.1.0

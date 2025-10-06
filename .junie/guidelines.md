@@ -1,5 +1,9 @@
 # Guidelines for Lightweight Spring Actuator Monitor
 
+**Version**: 1.1.0  
+**Last Updated**: 2025-10-05
+**Maintainer**: AI Documentation System
+
 ## 📋 Overview
 This document provides essential guidelines for AI to work with the Lightweight Spring Actuator Monitor project.
 
