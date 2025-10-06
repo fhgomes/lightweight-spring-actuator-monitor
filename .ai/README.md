@@ -18,6 +18,14 @@ This directory contains AI-specific documentation and guidelines for the project
 └── config.yml        # Machine-readable preferences
 ```
 
+## Purpose
+
+This directory provides structured context for AI code agents (Claude Code, GitHub Copilot, Cursor, etc.) to:
+- Understand the project architecture and goals
+- Follow consistent coding standards
+- Maintain quality and security best practices
+- Navigate the multi-repository ecosystem
+
 ## Quick Start for AI
 
 When working with this project, consider:
