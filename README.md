@@ -267,12 +267,6 @@ If this project helped you, please consider giving it a star! ⭐
 ---
 
 **Creator:** 
-* <a href="https://github.com/fhgomes/fhgomes" target="_blank">
-  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-</a>
-
-![Static Badge](https://img.shields.io/badge/:badgeContent)
-
-[Linkedin]([https://github.com/fhgomes/fhgomes](https://www.linkedin.com/in/fhgomes))  
+[Linkedin](https://www.linkedin.com/in/fhgomes) 
 [fhgomes](https://github.com/fhgomes/fhgomes)  
 **Contact:** tech.fernando.gomes@gmail.com
